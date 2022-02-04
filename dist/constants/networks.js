@@ -7,10 +7,9 @@ exports.chainIds = (_a = {},
     _a[types_1.ENetworks.GOERLI] = 5,
     _a[types_1.ENetworks.ARBITRUM_TESTNET] = 421611,
     _a);
-// TODO: add proxies?
-// implementation addresses
+// proxy addresses
 exports.registryAddresses = (_b = {},
-    _b[types_1.ENetworks.GOERLI] = "0x6E585aa374D92fEd6CA148EA3e5fB2E2DC53FFB5",
-    _b[types_1.ENetworks.ARBITRUM_TESTNET] = "0x7C40069bdC198925007786414343681bceCFd91D",
+    _b[types_1.ENetworks.GOERLI] = "0x7A667f935f767CbcBBd3B005a38C13448BfFEA70",
+    _b[types_1.ENetworks.ARBITRUM_TESTNET] = "0x9285CAA6F92D9Ba197966E854174e9B27B2061e5",
     _b);
 //# sourceMappingURL=networks.js.map

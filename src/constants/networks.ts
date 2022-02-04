@@ -5,9 +5,8 @@ export const chainIds = {
   [ENetworks.ARBITRUM_TESTNET]: 421611,
 };
 
-// TODO: add proxies?
-// implementation addresses
+// proxy addresses
 export const registryAddresses = {
-  [ENetworks.GOERLI]: "0x6E585aa374D92fEd6CA148EA3e5fB2E2DC53FFB5",
-  [ENetworks.ARBITRUM_TESTNET]: "0x7C40069bdC198925007786414343681bceCFd91D",
+  [ENetworks.GOERLI]: "0x7A667f935f767CbcBBd3B005a38C13448BfFEA70",
+  [ENetworks.ARBITRUM_TESTNET]: "0x9285CAA6F92D9Ba197966E854174e9B27B2061e5",
 };
