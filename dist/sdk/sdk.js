@@ -59,7 +59,9 @@ var OpiumV2SDK = /** @class */ (function () {
         else {
             this._provider = new providers_1.JsonRpcProvider(_config.rpcUrl);
         }
-        var network = (0, lodash_1.findKey)(constants_1.chainIds, _config.chainId);
+        var network = (0, lodash_1.findKey)(constants_1.chainIds, function (item) {
+            return item === _config.chainId;
+        });
         if (!network) {
             throw new Error("unsupported chainId");
         }

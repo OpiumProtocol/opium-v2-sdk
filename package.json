@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "include": [
+    "src",
+    "dist"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,9 +18,6 @@
     "generate:types": "typechain --target=ethers-v5 'src/abi/*.json' --out-dir 'src/types/typechain'",
     "generate:docs": "typedoc src/index.ts"
   },
-  "files": [
-    "/dist"
-  ],
   "dependencies": {
     "ethers": "^5.5.2",
     "lodash": "^4.17.21",

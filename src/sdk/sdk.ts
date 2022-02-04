@@ -1,7 +1,4 @@
-import {
-  ExternalProvider,
-  JsonRpcProvider,
-} from "@ethersproject/providers";
+import { ExternalProvider, JsonRpcProvider } from "@ethersproject/providers";
 import { findKey } from "lodash";
 import {
   CoreContract,
@@ -40,7 +37,9 @@ export class OpiumV2SDK {
     } else {
       this._provider = new JsonRpcProvider(_config.rpcUrl);
     }
-    const network = findKey(chainIds, _config.chainId);
+    const network = findKey(chainIds, (item) => {
+      return item === _config.chainId;
+    });
     if (!network) {
       throw new Error("unsupported chainId");
     }
