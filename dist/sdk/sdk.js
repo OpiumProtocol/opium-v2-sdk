@@ -75,9 +75,9 @@ var OpiumV2SDK = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.registryInstance.getProtocolAddresses()];
                     case 1:
                         protocolAddresses = _a.sent();
-                        this.coreInstance = new services_1.CoreContract(new _1.ContractService(protocolAddresses.core, Core_json_1.default.abi, this._provider));
-                        this.oracleAggregatorInstance = new services_1.OracleAggregatorContract(new _1.ContractService(protocolAddresses.oracleAggregator, OracleAggregator_json_1.default.abi, this._provider));
-                        this.syntheticAggregatorInstance = new services_1.SyntheticAggregatorContract(new _1.ContractService(protocolAddresses.syntheticAggregator, SyntheticAggregator_json_1.default.abi, this._provider));
+                        this.coreInstance = new services_1.CoreContract(new _1.ContractService(protocolAddresses.core, Core_json_1.default, this._provider));
+                        this.oracleAggregatorInstance = new services_1.OracleAggregatorContract(new _1.ContractService(protocolAddresses.oracleAggregator, OracleAggregator_json_1.default, this._provider));
+                        this.syntheticAggregatorInstance = new services_1.SyntheticAggregatorContract(new _1.ContractService(protocolAddresses.syntheticAggregator, SyntheticAggregator_json_1.default, this._provider));
                         return [2 /*return*/];
                 }
             });

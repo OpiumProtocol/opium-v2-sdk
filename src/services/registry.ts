@@ -6,17 +6,15 @@ import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
 
 export class RegistryContract {
   private _registryService: ContractService<Registry>;
-  private _registry: Registry;
 
   constructor(_registryService: ContractService<Registry>) {
     this._registryService = _registryService;
-    this._registry = _registryService.contract;
   }
 
   public async getProtocolParameters(): Promise<TProtocolParameters> {
     return struct(
       omit(
-        await this._registry.getProtocolParameters(),
+        await this._registryService.contract.getProtocolParameters(),
         "__gapOne",
         "__gapTwo",
         "__gapThree",
@@ -27,11 +25,15 @@ export class RegistryContract {
 
   public async getProtocolAddresses(): Promise<TProtocolAddresses> {
     return struct(
-      omit(await this._registry.getProtocolAddresses(), "__gapOne", "__gapTwo")
+      omit(
+        await this._registryService.contract.getProtocolAddresses(),
+        "__gapOne",
+        "__gapTwo"
+      )
     );
   }
 
   public async getCore(): Promise<string> {
-    return this._registry.getCore();
+    return this._registryService.contract.getCore();
   }
 }

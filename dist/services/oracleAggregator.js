@@ -39,13 +39,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OracleAggregatorContract = void 0;
 var OracleAggregatorContract = /** @class */ (function () {
     function OracleAggregatorContract(_oracleAggregatorService) {
-        this._oracleAggregator = _oracleAggregatorService.contract;
+        this._oracleAggregatorService = _oracleAggregatorService;
     }
-    OracleAggregatorContract.prototype.pushData = function (_timestamp, _data, _account, _overrides) {
+    OracleAggregatorContract.prototype.pushData = function (_timestamp, _data, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
+            var signer;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._oracleAggregator.connect(_account).__callback(_timestamp, _data, _overrides)];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._oracleAggregatorService.getProvider()];
+                    case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [2 /*return*/, this._oracleAggregatorService.contract
+                                .connect(signer)
+                                .__callback(_timestamp, _data, _overrides)];
+                }
             });
         });
     };
@@ -53,7 +61,7 @@ var OracleAggregatorContract = /** @class */ (function () {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._oracleAggregator.getData(_oracleId, _timestamp, _overrides)];
+                return [2 /*return*/, this._oracleAggregatorService.contract.getData(_oracleId, _timestamp, _overrides)];
             });
         });
     };
@@ -61,7 +69,7 @@ var OracleAggregatorContract = /** @class */ (function () {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._oracleAggregator.hasData(_oracleId, _timestamp, _overrides)];
+                return [2 /*return*/, this._oracleAggregatorService.contract.hasData(_oracleId, _timestamp, _overrides)];
             });
         });
     };

@@ -50,27 +50,33 @@ var IDerivativeLogic_json_1 = __importDefault(require("../abi/IDerivativeLogic.j
 var CoreContract = /** @class */ (function () {
     function CoreContract(_coreService) {
         this._coreService = _coreService;
-        this._core = _coreService.contract;
     }
     // ******** public methods ********
     CoreContract.prototype.create = function (_derivative, _amount, _positionsOwners, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tokenSpenderAddress, token, requiredMargin, tx;
+            var signer, tokenSpenderAddress, token, requiredMargin, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core.getProtocolAddresses()];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
-                        tokenSpenderAddress = _a.sent();
-                        token = (new contracts_1.Contract(_derivative.token, IERC20_json_1.default.abi, this._coreService.getProvider()));
-                        return [4 /*yield*/, this._computeDerivativeMargin(_derivative, _amount)];
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract.getProtocolAddresses()];
                     case 2:
-                        requiredMargin = _a.sent();
-                        return [4 /*yield*/, token.approve(tokenSpenderAddress.tokenSpender, requiredMargin)];
+                        tokenSpenderAddress = _a.sent();
+                        token = (new contracts_1.Contract(_derivative.token, IERC20_json_1.default, this._coreService.getProvider()));
+                        return [4 /*yield*/, this._computeDerivativeMargin(_derivative, _amount)];
                     case 3:
-                        _a.sent();
-                        return [4 /*yield*/, this._core.create(_derivative, _amount, _positionsOwners)];
+                        requiredMargin = _a.sent();
+                        return [4 /*yield*/, token
+                                .connect(signer)
+                                .approve(tokenSpenderAddress.tokenSpender, requiredMargin)];
                     case 4:
+                        _a.sent();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)
+                                .create(_derivative, _amount, _positionsOwners)];
+                    case 5:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -80,22 +86,28 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.createAndMint = function (_derivative, _amount, _positionsOwners, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tokenSpenderAddress, token, SyntheticIdContract, requiredMargin, tx;
+            var signer, tokenSpenderAddress, token, requiredMargin, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core.getProtocolAddresses()];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
-                        tokenSpenderAddress = _a.sent();
-                        token = (new contracts_1.Contract(_derivative.token, IERC20_json_1.default.abi, this._coreService.getProvider()));
-                        SyntheticIdContract = (new contracts_1.Contract(_derivative.syntheticId, IDerivativeLogic_json_1.default, this._coreService.getProvider()));
-                        return [4 /*yield*/, this._computeDerivativeMargin(_derivative, _amount)];
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract.getProtocolAddresses()];
                     case 2:
-                        requiredMargin = _a.sent();
-                        return [4 /*yield*/, token.approve(tokenSpenderAddress.tokenSpender, requiredMargin)];
+                        tokenSpenderAddress = _a.sent();
+                        token = (new contracts_1.Contract(_derivative.token, IERC20_json_1.default, this._coreService.getProvider()));
+                        return [4 /*yield*/, this._computeDerivativeMargin(_derivative, _amount)];
                     case 3:
-                        _a.sent();
-                        return [4 /*yield*/, this._core.createAndMint(_derivative, _amount, _positionsOwners, _overrides)];
+                        requiredMargin = _a.sent();
+                        return [4 /*yield*/, token
+                                .connect(signer)
+                                .approve(tokenSpenderAddress.tokenSpender, requiredMargin)];
                     case 4:
+                        _a.sent();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)
+                                .createAndMint(_derivative, _amount, _positionsOwners, _overrides)];
+                    case 5:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -105,11 +117,16 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.mint = function (_amount, _positionsAddresses, _positionsOwners, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core.mint(_amount, _positionsAddresses, _positionsOwners, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)
+                                .mint(_amount, _positionsAddresses, _positionsOwners, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -119,11 +136,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.redeem = function (_amount, _positionsAddresses, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["redeem(address[2],uint256)"](_positionsAddresses, _amount, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["redeem(address[2],uint256)"](_positionsAddresses, _amount, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -133,11 +154,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.redeemMany = function (_amounts, _positionsAddresses, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["redeem(address[2][],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["redeem(address[2][],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -147,11 +172,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.executeOne = function (_amount, _positionAddress, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["execute(address,uint256)"](_positionAddress, _amount, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["execute(address,uint256)"](_positionAddress, _amount, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -164,7 +193,7 @@ var CoreContract = /** @class */ (function () {
             var tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["execute(address,address,uint256)"](_positionOwner, _positionAddress, _amount, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.contract["execute(address,address,uint256)"](_positionOwner, _positionAddress, _amount, _overrides)];
                     case 1:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
@@ -175,11 +204,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.executeMany = function (_amounts, _positionsAddresses, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["execute(address[],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["execute(address[],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -189,11 +222,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.executeManyWithAddress = function (_positionOwner, _amounts, _positionsAddresses, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["execute(address,address[],uint256[])"](_positionOwner, _positionsAddresses, _amounts, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["execute(address,address[],uint256[])"](_positionOwner, _positionsAddresses, _amounts, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -203,11 +240,15 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.cancelOne = function (_positionAddress, _amount, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["cancel(address,uint256)"](_positionAddress, _amount, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract
+                                .connect(signer)["cancel(address,uint256)"](_positionAddress, _amount, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -217,11 +258,14 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.cancelMany = function (_amounts, _positionsAddresses, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var tx;
+            var signer, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._core["cancel(address[],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 0: return [4 /*yield*/, this._coreService.getProvider()];
                     case 1:
+                        signer = (_a.sent()).getSigner();
+                        return [4 /*yield*/, this._coreService.contract.connect(signer)["cancel(address[],uint256[])"](_positionsAddresses, _amounts, _overrides)];
+                    case 2:
                         tx = _a.sent();
                         return [2 /*return*/, tx.wait()];
                 }
@@ -264,7 +308,7 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype.getReservesVaultBalance = function (_reseveRecipient, _tokenAddress) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._core.getReservesVaultBalance(_reseveRecipient, _tokenAddress)];
+                return [2 /*return*/, this._coreService.contract.getReservesVaultBalance(_reseveRecipient, _tokenAddress)];
             });
         });
     };
@@ -276,8 +320,9 @@ var CoreContract = /** @class */ (function () {
                     case 0:
                         _a = misc_1.struct;
                         _b = lodash_1.omit;
-                        return [4 /*yield*/, this._core.getProtocolAddresses()];
-                    case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne", "__gapTwo"])])];
+                        return [4 /*yield*/, this._coreService.contract.getProtocolAddresses()];
+                    case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne",
+                                "__gapTwo"])])];
                 }
             });
         });
@@ -290,7 +335,7 @@ var CoreContract = /** @class */ (function () {
                     case 0:
                         _a = misc_1.struct;
                         _b = lodash_1.omit;
-                        return [4 /*yield*/, this._core.getProtocolParametersArgs()];
+                        return [4 /*yield*/, this._coreService.contract.getProtocolParametersArgs()];
                     case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne",
                                 "__gapTwo",
                                 "__gapThree",
@@ -311,14 +356,14 @@ var CoreContract = /** @class */ (function () {
     CoreContract.prototype._getDerivativePayouts = function (_derivativeHash) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._core.getDerivativePayouts(_derivativeHash)];
+                return [2 /*return*/, this._coreService.contract.getDerivativePayouts(_derivativeHash)];
             });
         });
     };
     CoreContract.prototype._isDerivativeCancelled = function (_derivativeHash) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._core.isDerivativeCancelled(_derivativeHash)];
+                return [2 /*return*/, this._coreService.contract.isDerivativeCancelled(_derivativeHash)];
             });
         });
     };

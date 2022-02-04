@@ -71,35 +71,38 @@ export declare namespace SyntheticAggregator {
 export interface SyntheticAggregatorInterface extends utils.Interface {
   contractName: "SyntheticAggregator";
   functions: {
-    "getMargin(bytes32,(uint256,uint256,uint256[],address,address,address))": FunctionFragment;
+    "getOrCacheMargin(bytes32,(uint256,uint256,uint256[],address,address,address))": FunctionFragment;
+    "getOrCacheSyntheticCache(bytes32,(uint256,uint256,uint256[],address,address,address))": FunctionFragment;
     "getRegistry()": FunctionFragment;
-    "getSyntheticCache(bytes32,(uint256,uint256,uint256[],address,address,address))": FunctionFragment;
     "initialize(address)": FunctionFragment;
     "setRegistry(address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "getMargin",
+    functionFragment: "getOrCacheMargin",
+    values: [BytesLike, LibDerivative.DerivativeStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrCacheSyntheticCache",
     values: [BytesLike, LibDerivative.DerivativeStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "getRegistry",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "getSyntheticCache",
-    values: [BytesLike, LibDerivative.DerivativeStruct]
-  ): string;
   encodeFunctionData(functionFragment: "initialize", values: [string]): string;
   encodeFunctionData(functionFragment: "setRegistry", values: [string]): string;
 
-  decodeFunctionResult(functionFragment: "getMargin", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getRegistry",
+    functionFragment: "getOrCacheMargin",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getSyntheticCache",
+    functionFragment: "getOrCacheSyntheticCache",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRegistry",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
@@ -161,19 +164,19 @@ export interface SyntheticAggregator extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getMargin(
+    getOrCacheMargin(
+      _derivativeHash: BytesLike,
+      _derivative: LibDerivative.DerivativeStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    getOrCacheSyntheticCache(
       _derivativeHash: BytesLike,
       _derivative: LibDerivative.DerivativeStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getRegistry(overrides?: CallOverrides): Promise<[string]>;
-
-    getSyntheticCache(
-      _derivativeHash: BytesLike,
-      _derivative: LibDerivative.DerivativeStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     initialize(
       _registry: string,
@@ -186,19 +189,19 @@ export interface SyntheticAggregator extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  getMargin(
+  getOrCacheMargin(
+    _derivativeHash: BytesLike,
+    _derivative: LibDerivative.DerivativeStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  getOrCacheSyntheticCache(
     _derivativeHash: BytesLike,
     _derivative: LibDerivative.DerivativeStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   getRegistry(overrides?: CallOverrides): Promise<string>;
-
-  getSyntheticCache(
-    _derivativeHash: BytesLike,
-    _derivative: LibDerivative.DerivativeStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   initialize(
     _registry: string,
@@ -211,7 +214,7 @@ export interface SyntheticAggregator extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    getMargin(
+    getOrCacheMargin(
       _derivativeHash: BytesLike,
       _derivative: LibDerivative.DerivativeStruct,
       overrides?: CallOverrides
@@ -222,13 +225,13 @@ export interface SyntheticAggregator extends BaseContract {
       }
     >;
 
-    getRegistry(overrides?: CallOverrides): Promise<string>;
-
-    getSyntheticCache(
+    getOrCacheSyntheticCache(
       _derivativeHash: BytesLike,
       _derivative: LibDerivative.DerivativeStruct,
       overrides?: CallOverrides
     ): Promise<SyntheticAggregator.SyntheticCacheStructOutput>;
+
+    getRegistry(overrides?: CallOverrides): Promise<string>;
 
     initialize(_registry: string, overrides?: CallOverrides): Promise<void>;
 
@@ -256,19 +259,19 @@ export interface SyntheticAggregator extends BaseContract {
   };
 
   estimateGas: {
-    getMargin(
+    getOrCacheMargin(
+      _derivativeHash: BytesLike,
+      _derivative: LibDerivative.DerivativeStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    getOrCacheSyntheticCache(
       _derivativeHash: BytesLike,
       _derivative: LibDerivative.DerivativeStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getRegistry(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getSyntheticCache(
-      _derivativeHash: BytesLike,
-      _derivative: LibDerivative.DerivativeStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     initialize(
       _registry: string,
@@ -282,19 +285,19 @@ export interface SyntheticAggregator extends BaseContract {
   };
 
   populateTransaction: {
-    getMargin(
+    getOrCacheMargin(
+      _derivativeHash: BytesLike,
+      _derivative: LibDerivative.DerivativeStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getOrCacheSyntheticCache(
       _derivativeHash: BytesLike,
       _derivative: LibDerivative.DerivativeStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getRegistry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getSyntheticCache(
-      _derivativeHash: BytesLike,
-      _derivative: LibDerivative.DerivativeStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     initialize(
       _registry: string,

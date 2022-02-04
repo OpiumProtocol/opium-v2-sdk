@@ -1,10 +1,10 @@
-import { Signer } from "ethers";
+import { CallOverrides } from "@ethersproject/contracts";
 import { TDerivative } from "../types/index";
 import { ContractService } from "../sdk";
 import { SyntheticAggregator } from "../types/typechain/SyntheticAggregator";
 export declare class SyntheticAggregatorContract {
-    private _syntheticAggregator;
+    private _syntheticAggregatorService;
     constructor(_syntheticAggregatorService: ContractService<SyntheticAggregator>);
-    getMargin(_derivative: TDerivative, _account: Signer): Promise<import("ethers").ContractTransaction>;
-    getSyntheticCache(_derivative: TDerivative, _account: Signer): Promise<any>;
+    getOrCacheMargin(_derivative: TDerivative, _overrides?: CallOverrides): Promise<import("@ethersproject/contracts").ContractTransaction>;
+    getOrCacheSyntheticCache(_derivative: TDerivative, _overrides?: CallOverrides): Promise<any>;
 }

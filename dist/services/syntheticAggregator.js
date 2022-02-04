@@ -41,29 +41,40 @@ var misc_1 = require("../utils/misc");
 var financial_1 = require("../utils/financial");
 var SyntheticAggregatorContract = /** @class */ (function () {
     function SyntheticAggregatorContract(_syntheticAggregatorService) {
-        this._syntheticAggregator = _syntheticAggregatorService.contract;
+        this._syntheticAggregatorService = _syntheticAggregatorService;
     }
-    // TODO: update the name/abi
-    SyntheticAggregatorContract.prototype.getMargin = function (_derivative, _account) {
+    SyntheticAggregatorContract.prototype.getOrCacheMargin = function (_derivative, _overrides) {
+        if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var derivativeHash;
+            var signer, derivativeHash;
             return __generator(this, function (_a) {
-                derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
-                return [2 /*return*/, this._syntheticAggregator.connect(_account).getMargin(derivativeHash, _derivative)];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._syntheticAggregatorService.getProvider()];
+                    case 1:
+                        signer = (_a.sent()).getSigner();
+                        derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
+                        return [2 /*return*/, this._syntheticAggregatorService.contract
+                                .connect(signer)
+                                .getOrCacheMargin(derivativeHash, _derivative)];
+                }
             });
         });
     };
-    // TODO: update the name/abi
-    SyntheticAggregatorContract.prototype.getSyntheticCache = function (_derivative, _account) {
+    SyntheticAggregatorContract.prototype.getOrCacheSyntheticCache = function (_derivative, _overrides) {
+        if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var derivativeHash, _a;
+            var signer, derivativeHash, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0:
+                    case 0: return [4 /*yield*/, this._syntheticAggregatorService.getProvider()];
+                    case 1:
+                        signer = (_b.sent()).getSigner();
                         derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
                         _a = misc_1.struct;
-                        return [4 /*yield*/, this._syntheticAggregator.connect(_account).getSyntheticCache(derivativeHash, _derivative)];
-                    case 1: return [2 /*return*/, _a.apply(void 0, [_b.sent()])];
+                        return [4 /*yield*/, this._syntheticAggregatorService.contract
+                                .connect(signer)
+                                .getOrCacheSyntheticCache(derivativeHash, _derivative)];
+                    case 2: return [2 /*return*/, _a.apply(void 0, [_b.sent()])];
                 }
             });
         });

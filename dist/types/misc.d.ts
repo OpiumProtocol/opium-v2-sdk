@@ -5,3 +5,4 @@ export declare enum ENetworks {
     ARBITRUM_TESTNET = "ARBITRUM_TESTNET"
 }
 export declare type valueof<T> = T[keyof T];
+export declare type TAddress = string;

@@ -14,7 +14,7 @@ import { Core, OracleAggregator, Registry } from "../types/typechain";
 import { SyntheticAggregator } from "../types/typechain/SyntheticAggregator";
 import { RegistryContract } from "../services/registry";
 import { chainIds, registryAddresses } from "../constants";
-import { ENetworks, valueof } from "../types";
+import { ENetworks } from "../types";
 import { providers } from "ethers";
 
 export interface IOpiumV2SDKConfig {
@@ -60,7 +60,7 @@ export class OpiumV2SDK {
     this.coreInstance = new CoreContract(
       new ContractService<Core>(
         protocolAddresses.core,
-        CoreABI.abi,
+        CoreABI,
         this._provider
       )
     );
@@ -68,7 +68,7 @@ export class OpiumV2SDK {
     this.oracleAggregatorInstance = new OracleAggregatorContract(
       new ContractService<OracleAggregator>(
         protocolAddresses.oracleAggregator,
-        OracleAggregatorABI.abi,
+        OracleAggregatorABI,
         this._provider
       )
     );
@@ -76,7 +76,7 @@ export class OpiumV2SDK {
     this.syntheticAggregatorInstance = new SyntheticAggregatorContract(
       new ContractService<SyntheticAggregator>(
         protocolAddresses.syntheticAggregator,
-        SyntheticAggregatorABI.abi,
+        SyntheticAggregatorABI,
         this._provider
       )
     );

@@ -121,7 +121,7 @@ var _abi = [
                 type: "tuple",
             },
         ],
-        name: "getMargin",
+        name: "getOrCacheMargin",
         outputs: [
             {
                 internalType: "uint256",
@@ -135,19 +135,6 @@ var _abi = [
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
-    },
-    {
-        inputs: [],
-        name: "getRegistry",
-        outputs: [
-            {
-                internalType: "address",
-                name: "",
-                type: "address",
-            },
-        ],
-        stateMutability: "view",
         type: "function",
     },
     {
@@ -195,7 +182,7 @@ var _abi = [
                 type: "tuple",
             },
         ],
-        name: "getSyntheticCache",
+        name: "getOrCacheSyntheticCache",
         outputs: [
             {
                 components: [
@@ -231,6 +218,19 @@ var _abi = [
             },
         ],
         stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "getRegistry",
+        outputs: [
+            {
+                internalType: "address",
+                name: "",
+                type: "address",
+            },
+        ],
+        stateMutability: "view",
         type: "function",
     },
     {

@@ -1,18 +1,17 @@
 import { CallOverrides, ContractReceipt } from "@ethersproject/contracts";
 import { BigNumberish } from "ethers";
 import { Core } from "../types/typechain";
-import { TDerivative } from "../types/index";
+import { TDerivative, TAddress } from "../types/index";
 import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
 import { ContractService } from "../sdk";
 export declare class CoreContract {
     private _coreService;
-    private _core;
     constructor(_coreService: ContractService<Core>);
-    create(_derivative: TDerivative, _amount: BigNumberish, _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
-    createAndMint(_derivative: TDerivative, _amount: BigNumberish, _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
-    mint(_amount: BigNumberish, _positionsAddresses: [string, string], _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
-    redeem(_amount: BigNumberish, _positionsAddresses: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
-    redeemMany(_amounts: BigNumberish[], _positionsAddresses: [string, string][], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    create(_derivative: TDerivative, _amount: BigNumberish, _positionsOwners: [TAddress, TAddress], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    createAndMint(_derivative: TDerivative, _amount: BigNumberish, _positionsOwners: [TAddress, TAddress], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    mint(_amount: BigNumberish, _positionsAddresses: [TAddress, TAddress], _positionsOwners: [TAddress, TAddress], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    redeem(_amount: BigNumberish, _positionsAddresses: [TAddress, TAddress], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    redeemMany(_amounts: BigNumberish[], _positionsAddresses: [TAddress, TAddress][], _overrides?: CallOverrides): Promise<ContractReceipt>;
     executeOne(_amount: BigNumberish, _positionAddress: string, _overrides?: CallOverrides): Promise<ContractReceipt>;
     executeOneWithAddress(_positionOwner: string, _amount: BigNumberish, _positionAddress: string, _overrides?: CallOverrides): Promise<ContractReceipt>;
     executeMany(_amounts: BigNumberish[], _positionsAddresses: string[], _overrides?: CallOverrides): Promise<ContractReceipt>;

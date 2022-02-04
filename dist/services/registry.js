@@ -42,7 +42,6 @@ var misc_1 = require("../utils/misc");
 var RegistryContract = /** @class */ (function () {
     function RegistryContract(_registryService) {
         this._registryService = _registryService;
-        this._registry = _registryService.contract;
     }
     RegistryContract.prototype.getProtocolParameters = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -52,7 +51,7 @@ var RegistryContract = /** @class */ (function () {
                     case 0:
                         _a = misc_1.struct;
                         _b = lodash_1.omit;
-                        return [4 /*yield*/, this._registry.getProtocolParameters()];
+                        return [4 /*yield*/, this._registryService.contract.getProtocolParameters()];
                     case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne",
                                 "__gapTwo",
                                 "__gapThree",
@@ -69,8 +68,9 @@ var RegistryContract = /** @class */ (function () {
                     case 0:
                         _a = misc_1.struct;
                         _b = lodash_1.omit;
-                        return [4 /*yield*/, this._registry.getProtocolAddresses()];
-                    case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne", "__gapTwo"])])];
+                        return [4 /*yield*/, this._registryService.contract.getProtocolAddresses()];
+                    case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), "__gapOne",
+                                "__gapTwo"])])];
                 }
             });
         });
@@ -78,7 +78,7 @@ var RegistryContract = /** @class */ (function () {
     RegistryContract.prototype.getCore = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this._registry.getCore()];
+                return [2 /*return*/, this._registryService.contract.getCore()];
             });
         });
     };
