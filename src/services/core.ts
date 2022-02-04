@@ -4,7 +4,7 @@ import {
   CallOverrides,
   ContractReceipt,
 } from "@ethersproject/contracts";
-import { BigNumber } from "ethers";
+import {  BigNumberish } from "ethers";
 import { Core, IERC20 } from "../types/typechain";
 import { TDerivative } from "../types/index";
 import { mulDiv } from "../utils/financial";
@@ -29,7 +29,7 @@ export class CoreContract {
 
   public async create(
     _derivative: TDerivative,
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionsOwners: [string, string],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -52,7 +52,7 @@ export class CoreContract {
   }
   public async createAndMint(
     _derivative: TDerivative,
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionsOwners: [string, string],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -85,7 +85,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async mint(
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionsAddresses: [string, string],
     _positionsOwners: [string, string],
     _overrides: CallOverrides = {}
@@ -100,7 +100,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async redeem(
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionsAddresses: [string, string],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -112,7 +112,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async redeemMany(
-    _amounts: BigNumber[],
+    _amounts: BigNumberish[],
     _positionsAddresses: [string, string][],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -124,7 +124,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async executeOne(
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionAddress: string,
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -137,7 +137,7 @@ export class CoreContract {
   }
   public async executeOneWithAddress(
     _positionOwner: string,
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _positionAddress: string,
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -150,7 +150,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async executeMany(
-    _amounts: BigNumber[],
+    _amounts: BigNumberish[],
     _positionsAddresses: string[],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -163,7 +163,7 @@ export class CoreContract {
   }
   public async executeManyWithAddress(
     _positionOwner: string,
-    _amounts: BigNumber[],
+    _amounts: BigNumberish[],
     _positionsAddresses: string[],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -177,7 +177,7 @@ export class CoreContract {
   }
   public async cancelOne(
     _positionAddress: string,
-    _amount: BigNumber,
+    _amount: BigNumberish,
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
     const tx = await this._core["cancel(address,uint256)"](
@@ -188,7 +188,7 @@ export class CoreContract {
     return tx.wait();
   }
   public async cancelMany(
-    _amounts: BigNumber[],
+    _amounts: BigNumberish[],
     _positionsAddresses: string[],
     _overrides: CallOverrides = {}
   ): Promise<ContractReceipt> {
@@ -217,21 +217,21 @@ export class CoreContract {
 
   public async getDerivativePayoutsByDerivative(
     _derivative: TDerivative
-  ): Promise<[BigNumber, BigNumber]> {
+  ): Promise<[BigNumberish, BigNumberish]> {
     const derivativeHash = getDerivativeHash(_derivative);
     return this._getDerivativePayouts(derivativeHash);
   }
 
   public async getDerivativePayoutsByDerivativeHash(
     _derivativeHash: string
-  ): Promise<[BigNumber, BigNumber]> {
+  ): Promise<[BigNumberish, BigNumberish]> {
     return this._getDerivativePayouts(_derivativeHash);
   }
 
   public async getReservesVaultBalance(
     _reseveRecipient: string,
     _tokenAddress: string
-  ): Promise<BigNumber> {
+  ): Promise<BigNumberish> {
     return this._core.getReservesVaultBalance(_reseveRecipient, _tokenAddress);
   }
 
@@ -256,7 +256,7 @@ export class CoreContract {
   // helpers
   public async computeDerivativeMargin(
     _derivative: TDerivative,
-    _amount: BigNumber
+    _amount: BigNumberish
   ) {
     return this._computeDerivativeMargin(_derivative, _amount);
   }
@@ -265,7 +265,7 @@ export class CoreContract {
 
   private async _getDerivativePayouts(
     _derivativeHash: string
-  ): Promise<[BigNumber, BigNumber]> {
+  ): Promise<[BigNumberish, BigNumberish]> {
     return this._core.getDerivativePayouts(_derivativeHash);
   }
 
@@ -277,8 +277,8 @@ export class CoreContract {
 
   private async _computeDerivativeMargin(
     _derivative: TDerivative,
-    _amount: BigNumber
-  ): Promise<BigNumber> {
+    _amount: BigNumberish
+  ): Promise<BigNumberish> {
     const syntheticId = <IDerivativeLogic>(
       new Contract(
         _derivative.syntheticId,

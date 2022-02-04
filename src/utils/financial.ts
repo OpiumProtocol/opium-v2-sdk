@@ -1,14 +1,14 @@
-import { utils, BigNumber } from "ethers";
-import { toBN } from ".";
+import { utils, BigNumberish, BigNumber } from "ethers";
+import { cast, toBN } from ".";
 import { zeroAddress } from "../constants";
 import { TDerivative } from "../types";
 
 export const mulDiv = (
-  amountX: BigNumber,
-  amountY: BigNumber,
-  scalingFactor: BigNumber = utils.parseUnits("1", 18)
-): BigNumber => {
-  const result = amountX.mul(amountY);
+  amountX: BigNumberish,
+  amountY: BigNumberish,
+  scalingFactor: BigNumberish = utils.parseUnits("1", 18)
+): BigNumberish => {
+  const result = cast(amountX).mul(cast(amountY));
   return result.div(scalingFactor);
 };
 

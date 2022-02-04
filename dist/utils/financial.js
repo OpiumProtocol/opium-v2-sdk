@@ -17,7 +17,7 @@ var _1 = require(".");
 var constants_1 = require("../constants");
 var mulDiv = function (amountX, amountY, scalingFactor) {
     if (scalingFactor === void 0) { scalingFactor = ethers_1.utils.parseUnits("1", 18); }
-    var result = amountX.mul(amountY);
+    var result = (0, _1.cast)(amountX).mul((0, _1.cast)(amountY));
     return result.div(scalingFactor);
 };
 exports.mulDiv = mulDiv;

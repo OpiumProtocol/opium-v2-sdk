@@ -1,9 +1,9 @@
-import { BigNumber } from "ethers";
+import { BigNumberish } from "ethers";
 
 export type TDerivative = {
-  margin: BigNumber;
+  margin: BigNumberish;
   endTime: number;
-  params: BigNumber[];
+  params: BigNumberish[];
   oracleId: string;
   token: string;
   syntheticId: string;
