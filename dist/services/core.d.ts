@@ -1,0 +1,33 @@
+import { CallOverrides, ContractReceipt } from "@ethersproject/contracts";
+import { BigNumber } from "ethers";
+import { Core } from "../types/typechain";
+import { TDerivative } from "../types/index";
+import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
+import { ContractService } from "../sdk";
+export declare class CoreContract {
+    private _coreService;
+    private _core;
+    constructor(_coreService: ContractService<Core>);
+    create(_derivative: TDerivative, _amount: BigNumber, _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    createAndMint(_derivative: TDerivative, _amount: BigNumber, _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    mint(_amount: BigNumber, _positionsAddresses: [string, string], _positionsOwners: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    redeem(_amount: BigNumber, _positionsAddresses: [string, string], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    redeemMany(_amounts: BigNumber[], _positionsAddresses: [string, string][], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    executeOne(_amount: BigNumber, _positionAddress: string, _overrides?: CallOverrides): Promise<ContractReceipt>;
+    executeOneWithAddress(_positionOwner: string, _amount: BigNumber, _positionAddress: string, _overrides?: CallOverrides): Promise<ContractReceipt>;
+    executeMany(_amounts: BigNumber[], _positionsAddresses: string[], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    executeManyWithAddress(_positionOwner: string, _amounts: BigNumber[], _positionsAddresses: string[], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    cancelOne(_positionAddress: string, _amount: BigNumber, _overrides?: CallOverrides): Promise<ContractReceipt>;
+    cancelMany(_amounts: BigNumber[], _positionsAddresses: string[], _overrides?: CallOverrides): Promise<ContractReceipt>;
+    isDerivativeCancelledByDerivative(_derivative: TDerivative): Promise<boolean>;
+    isDerivativeCancelledByDerivativeHash(_derivativeHash: string): Promise<boolean>;
+    getDerivativePayoutsByDerivative(_derivative: TDerivative): Promise<[BigNumber, BigNumber]>;
+    getDerivativePayoutsByDerivativeHash(_derivativeHash: string): Promise<[BigNumber, BigNumber]>;
+    getReservesVaultBalance(_reseveRecipient: string, _tokenAddress: string): Promise<BigNumber>;
+    getProtocolAddresses(): Promise<TProtocolAddresses>;
+    getProtocolParametersArgs(): Promise<TProtocolParameters>;
+    computeDerivativeMargin(_derivative: TDerivative, _amount: BigNumber): Promise<BigNumber>;
+    private _getDerivativePayouts;
+    private _isDerivativeCancelled;
+    private _computeDerivativeMargin;
+}
