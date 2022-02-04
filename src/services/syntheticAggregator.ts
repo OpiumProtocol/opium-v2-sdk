@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { Signer } from "ethers";
 import { TDerivative } from "../types/index";
 import { struct } from "../utils/misc";

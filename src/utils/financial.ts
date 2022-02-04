@@ -3,12 +3,13 @@ import { toBN } from ".";
 import { zeroAddress } from "../constants";
 import { TDerivative } from "../types";
 
-export const computeDerivativeMargin = (
-  margin: BigNumber,
-  amount: BigNumber
+export const mulDiv = (
+  amountX: BigNumber,
+  amountY: BigNumber,
+  scalingFactor: BigNumber = utils.parseUnits("1", 18)
 ): BigNumber => {
-  const result = margin.mul(amount);
-  return result.div(utils.parseUnits("1", 18));
+  const result = amountX.mul(amountY);
+  return result.div(scalingFactor);
 };
 
 export const getDerivativeHash = (derivative: TDerivative): string => {
