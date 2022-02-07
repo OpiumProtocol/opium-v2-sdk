@@ -5,16 +5,16 @@ import {
   ContractReceipt,
 } from "@ethersproject/contracts";
 import { BigNumberish } from "ethers";
-import { Core, IERC20 } from "../types/typechain";
-import { TDerivative, TAddress } from "../types/index";
-import { mulDiv } from "../utils/financial";
-import { struct } from "../utils/misc";
-import { getDerivativeHash } from "../utils/financial";
-import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
-import { ContractService } from "../sdk";
-import { IDerivativeLogic } from "../types/typechain/IDerivativeLogic";
-import IERC20Abi from "../abi/IERC20.json";
-import IDerivativeLogicAbi from "../abi/IDerivativeLogic.json";
+import { Core, IERC20 } from "../../types/typechain";
+import { TDerivative, TAddress } from "../../types/index";
+import { mulDiv } from "../../utils/financial";
+import { struct } from "../../utils/misc";
+import { getDerivativeHash } from "../../utils/financial";
+import { TProtocolAddresses, TProtocolParameters } from "../../types/contracts";
+import { ContractService } from "../../sdk";
+import { IDerivativeLogic } from "../../types/typechain/IDerivativeLogic";
+import IERC20Abi from "../../abi/IERC20.json";
+import IDerivativeLogicAbi from "../../abi/IDerivativeLogic.json";
 
 export class CoreContract {
   private _coreService: ContractService<Core>;

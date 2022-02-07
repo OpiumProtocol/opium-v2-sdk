@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegistryContract = void 0;
 var lodash_1 = require("lodash");
-var misc_1 = require("../utils/misc");
+var misc_1 = require("../../utils/misc");
 var RegistryContract = /** @class */ (function () {
     function RegistryContract(_registryService) {
         this._registryService = _registryService;

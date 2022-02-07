@@ -1,7 +1,7 @@
 import { CallOverrides } from "@ethersproject/contracts";
 import { BigNumber, ContractTransaction } from "ethers";
-import { ContractService } from "../sdk";
-import { OracleAggregator } from "../types/typechain/OracleAggregator";
+import { ContractService } from "../../sdk";
+import { OracleAggregator } from "../../types/typechain/OracleAggregator";
 
 export class OracleAggregatorContract {
   private _oracleAggregatorService: ContractService<OracleAggregator>;

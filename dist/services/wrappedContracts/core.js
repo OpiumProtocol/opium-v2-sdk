@@ -42,11 +42,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CoreContract = void 0;
 var lodash_1 = require("lodash");
 var contracts_1 = require("@ethersproject/contracts");
-var financial_1 = require("../utils/financial");
-var misc_1 = require("../utils/misc");
-var financial_2 = require("../utils/financial");
-var IERC20_json_1 = __importDefault(require("../abi/IERC20.json"));
-var IDerivativeLogic_json_1 = __importDefault(require("../abi/IDerivativeLogic.json"));
+var financial_1 = require("../../utils/financial");
+var misc_1 = require("../../utils/misc");
+var financial_2 = require("../../utils/financial");
+var IERC20_json_1 = __importDefault(require("../../abi/IERC20.json"));
+var IDerivativeLogic_json_1 = __importDefault(require("../../abi/IDerivativeLogic.json"));
 var CoreContract = /** @class */ (function () {
     function CoreContract(_coreService) {
         this._coreService = _coreService;

@@ -1,8 +1,8 @@
 import { omit } from "lodash";
-import { Registry } from "../types/typechain";
-import { struct } from "../utils/misc";
-import { ContractService } from "../sdk";
-import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
+import { Registry } from "../../types/typechain";
+import { struct } from "../../utils/misc";
+import { ContractService } from "../../sdk";
+import { TProtocolAddresses, TProtocolParameters } from "../../types/contracts";
 
 export class RegistryContract {
   private _registryService: ContractService<Registry>;

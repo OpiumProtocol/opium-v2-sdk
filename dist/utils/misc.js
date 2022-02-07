@@ -1,7 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.structArray = exports.struct = void 0;
+exports.structArray = exports.struct = exports.configByChain = void 0;
 var bignumber_1 = require("@ethersproject/bignumber/lib/bignumber");
+var lodash_1 = require("lodash");
+var constants_1 = require("../constants");
+var configByChain = function (chainIds, chainId) {
+    var network = (0, lodash_1.findKey)(chainIds, function (id) {
+        return id === chainId;
+    });
+    if (network) {
+        return {
+            registryAddress: constants_1.registryAddresses[network],
+            subgraphEndpoint: constants_1.subgraphEndpoints[network],
+        };
+    }
+    return undefined;
+};
+exports.configByChain = configByChain;
 // TODO (mine): polish yearn code with generics to improve type-safety
 /**
  *

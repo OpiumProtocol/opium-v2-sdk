@@ -1,9 +1,10 @@
 import { ExternalProvider, JsonRpcProvider } from "@ethersproject/providers";
-import { findKey } from "lodash";
 import {
   CoreContract,
   OracleAggregatorContract,
   SyntheticAggregatorContract,
+  RegistryContract,
+  SubgraphService,
 } from "../services";
 import { ContractService } from ".";
 import RegistryABI from "../abi/Registry.json";
@@ -12,10 +13,9 @@ import OracleAggregatorABI from "../abi/OracleAggregator.json";
 import SyntheticAggregatorABI from "../abi/SyntheticAggregator.json";
 import { Core, OracleAggregator, Registry } from "../types/typechain";
 import { SyntheticAggregator } from "../types/typechain/SyntheticAggregator";
-import { RegistryContract } from "../services/registry";
-import { chainIds, registryAddresses } from "../constants";
-import { ENetworks } from "../types";
+import { chainIds } from "../constants";
 import { providers } from "ethers";
+import { configByChain } from "../utils";
 
 export interface IOpiumV2SDKConfig {
   //use a known network or provide an entirely custom config
@@ -26,10 +26,13 @@ export interface IOpiumV2SDKConfig {
 
 export class OpiumV2SDK {
   public readonly _provider: JsonRpcProvider;
+  // smart contracts' services
   public registryInstance: RegistryContract;
   public coreInstance: CoreContract | undefined;
   public oracleAggregatorInstance: OracleAggregatorContract | undefined;
   public syntheticAggregatorInstance: SyntheticAggregatorContract | undefined;
+  // subgraph service
+  public subgraphService: SubgraphService;
 
   constructor(_config: IOpiumV2SDKConfig) {
     if (_config.override) {
@@ -37,20 +40,20 @@ export class OpiumV2SDK {
     } else {
       this._provider = new JsonRpcProvider(_config.rpcUrl);
     }
-    const network = findKey(chainIds, (item) => {
-      return item === _config.chainId;
-    });
-    if (!network) {
+    const networkConfig = configByChain(chainIds, _config.chainId);
+    if (!networkConfig) {
       throw new Error("unsupported chainId");
     }
 
     this.registryInstance = new RegistryContract(
       new ContractService<Registry>(
-        registryAddresses[network as ENetworks],
+        networkConfig.registryAddress,
         RegistryABI,
         this._provider
       )
     );
+
+    this.subgraphService = new SubgraphService(networkConfig.subgraphEndpoint);
   }
 
   public async setup(): Promise<void> {
@@ -58,11 +61,7 @@ export class OpiumV2SDK {
       await this.registryInstance.getProtocolAddresses();
 
     this.coreInstance = new CoreContract(
-      new ContractService<Core>(
-        protocolAddresses.core,
-        CoreABI,
-        this._provider
-      )
+      new ContractService<Core>(protocolAddresses.core, CoreABI, this._provider)
     );
 
     this.oracleAggregatorInstance = new OracleAggregatorContract(

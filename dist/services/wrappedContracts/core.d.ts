@@ -1,9 +1,9 @@
 import { CallOverrides, ContractReceipt } from "@ethersproject/contracts";
 import { BigNumberish } from "ethers";
-import { Core } from "../types/typechain";
-import { TDerivative, TAddress } from "../types/index";
-import { TProtocolAddresses, TProtocolParameters } from "../types/contracts";
-import { ContractService } from "../sdk";
+import { Core } from "../../types/typechain";
+import { TDerivative, TAddress } from "../../types/index";
+import { TProtocolAddresses, TProtocolParameters } from "../../types/contracts";
+import { ContractService } from "../../sdk";
 export declare class CoreContract {
     private _coreService;
     constructor(_coreService: ContractService<Core>);

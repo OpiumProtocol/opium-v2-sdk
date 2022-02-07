@@ -1,9 +1,9 @@
 import { CallOverrides } from "@ethersproject/contracts";
-import { TDerivative } from "../types/index";
-import { struct } from "../utils/misc";
-import { getDerivativeHash } from "../utils/financial";
-import { ContractService } from "../sdk";
-import { SyntheticAggregator } from "../types/typechain/SyntheticAggregator";
+import { TDerivative } from "../../types/index";
+import { struct } from "../../utils/misc";
+import { getDerivativeHash } from "../../utils/financial";
+import { ContractService } from "../../sdk";
+import { SyntheticAggregator } from "../../types/typechain/SyntheticAggregator";
 
 export class SyntheticAggregatorContract {
   private _syntheticAggregatorService: ContractService<SyntheticAggregator>;

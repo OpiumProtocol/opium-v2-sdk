@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SyntheticAggregatorContract = void 0;
-var misc_1 = require("../utils/misc");
-var financial_1 = require("../utils/financial");
+var misc_1 = require("../../utils/misc");
+var financial_1 = require("../../utils/financial");
 var SyntheticAggregatorContract = /** @class */ (function () {
     function SyntheticAggregatorContract(_syntheticAggregatorService) {
         this._syntheticAggregatorService = _syntheticAggregatorService;

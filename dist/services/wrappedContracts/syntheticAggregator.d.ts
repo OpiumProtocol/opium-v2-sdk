@@ -1,7 +1,7 @@
 import { CallOverrides } from "@ethersproject/contracts";
-import { TDerivative } from "../types/index";
-import { ContractService } from "../sdk";
-import { SyntheticAggregator } from "../types/typechain/SyntheticAggregator";
+import { TDerivative } from "../../types/index";
+import { ContractService } from "../../sdk";
+import { SyntheticAggregator } from "../../types/typechain/SyntheticAggregator";
 export declare class SyntheticAggregatorContract {
     private _syntheticAggregatorService;
     constructor(_syntheticAggregatorService: ContractService<SyntheticAggregator>);

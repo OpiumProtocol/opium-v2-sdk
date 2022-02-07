@@ -41,16 +41,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpiumV2SDK = void 0;
 var providers_1 = require("@ethersproject/providers");
-var lodash_1 = require("lodash");
 var services_1 = require("../services");
 var _1 = require(".");
 var Registry_json_1 = __importDefault(require("../abi/Registry.json"));
 var Core_json_1 = __importDefault(require("../abi/Core.json"));
 var OracleAggregator_json_1 = __importDefault(require("../abi/OracleAggregator.json"));
 var SyntheticAggregator_json_1 = __importDefault(require("../abi/SyntheticAggregator.json"));
-var registry_1 = require("../services/registry");
 var constants_1 = require("../constants");
 var ethers_1 = require("ethers");
+var utils_1 = require("../utils");
 var OpiumV2SDK = /** @class */ (function () {
     function OpiumV2SDK(_config) {
         if (_config.override) {
@@ -59,13 +58,12 @@ var OpiumV2SDK = /** @class */ (function () {
         else {
             this._provider = new providers_1.JsonRpcProvider(_config.rpcUrl);
         }
-        var network = (0, lodash_1.findKey)(constants_1.chainIds, function (item) {
-            return item === _config.chainId;
-        });
-        if (!network) {
+        var networkConfig = (0, utils_1.configByChain)(constants_1.chainIds, _config.chainId);
+        if (!networkConfig) {
             throw new Error("unsupported chainId");
         }
-        this.registryInstance = new registry_1.RegistryContract(new _1.ContractService(constants_1.registryAddresses[network], Registry_json_1.default, this._provider));
+        this.registryInstance = new services_1.RegistryContract(new _1.ContractService(networkConfig.registryAddress, Registry_json_1.default, this._provider));
+        this.subgraphService = new services_1.SubgraphService(networkConfig.subgraphEndpoint);
     }
     OpiumV2SDK.prototype.setup = function () {
         return __awaiter(this, void 0, void 0, function () {

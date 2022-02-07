@@ -1,3 +1,7 @@
+import { TConfigByChainOrUndefined } from "../types";
+export declare const configByChain: (chainIds: {
+    [key: string]: number;
+}, chainId: number) => TConfigByChainOrUndefined;
 /**
  *
  *

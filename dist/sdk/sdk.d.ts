@@ -1,6 +1,5 @@
 import { ExternalProvider, JsonRpcProvider } from "@ethersproject/providers";
-import { CoreContract, OracleAggregatorContract, SyntheticAggregatorContract } from "../services";
-import { RegistryContract } from "../services/registry";
+import { CoreContract, OracleAggregatorContract, SyntheticAggregatorContract, RegistryContract, SubgraphService } from "../services";
 import { chainIds } from "../constants";
 export interface IOpiumV2SDKConfig {
     rpcUrl: string;
@@ -13,6 +12,7 @@ export declare class OpiumV2SDK {
     coreInstance: CoreContract | undefined;
     oracleAggregatorInstance: OracleAggregatorContract | undefined;
     syntheticAggregatorInstance: SyntheticAggregatorContract | undefined;
+    subgraphService: SubgraphService;
     constructor(_config: IOpiumV2SDKConfig);
     setup(): Promise<void>;
 }

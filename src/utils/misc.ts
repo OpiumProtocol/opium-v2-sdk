@@ -1,10 +1,29 @@
 import { isBigNumberish } from "@ethersproject/bignumber/lib/bignumber";
+import { findKey } from "lodash";
+import { registryAddresses, subgraphEndpoints } from "../constants";
+import { ENetworks, TConfigByChainOrUndefined } from "../types";
+
+export const configByChain = (
+  chainIds: { [key: string]: number },
+  chainId: number
+): TConfigByChainOrUndefined => {
+  const network = findKey(chainIds, (id) => {
+    return id === chainId;
+  });
+  if (network) {
+    return {
+      registryAddress: registryAddresses[network as ENetworks],
+      subgraphEndpoint: subgraphEndpoints[network as ENetworks],
+    };
+  }
+  return undefined;
+};
 
 // TODO (mine): polish yearn code with generics to improve type-safety
 
 /**
- * 
- * 
+ *
+ *
  * below: taken from yearn
  */
 // convert tuples

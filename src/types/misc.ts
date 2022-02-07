@@ -15,3 +15,10 @@ export enum ENetworks {
 export type valueof<T> = T[keyof T];
 
 export type TAddress = string;
+
+export type TConfigByChain = {
+  registryAddress: TAddress;
+  subgraphEndpoint: string;
+};
+
+export type TConfigByChainOrUndefined = TConfigByChain | undefined;
