@@ -1,0 +1,6 @@
+# folders
+src/abi/**/*
+dist/
+node_modules/
+src/types/typechain/**/*
+docs/

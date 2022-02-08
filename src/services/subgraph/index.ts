@@ -1,1 +1,1 @@
-export * from "./subgraph";
+export * from './subgraph';

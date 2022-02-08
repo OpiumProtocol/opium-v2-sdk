@@ -1,4 +1,4 @@
-import { TAddress } from ".";
+import { TAddress } from '.';
 
 // positions
 export type TPosition = {

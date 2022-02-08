@@ -1,2 +1,2 @@
-export * from "./subgraph";
-export * from "./wrappedContracts";
+export * from './subgraph';
+export * from './wrappedContracts';

@@ -1,8 +1,8 @@
-import { omit } from "lodash";
-import { Registry } from "../../types/typechain";
-import { struct } from "../../utils/misc";
-import { ContractService } from "../../sdk";
-import { TProtocolAddresses, TProtocolParameters } from "../../types/contracts";
+import { omit } from 'lodash';
+import { Registry } from '../../types/typechain';
+import { struct } from '../../utils/misc';
+import { ContractService } from '../../sdk';
+import { TProtocolAddresses, TProtocolParameters } from '../../types/contracts';
 
 export class RegistryContract {
   private _registryService: ContractService<Registry>;
@@ -15,22 +15,16 @@ export class RegistryContract {
     return struct(
       omit(
         await this._registryService.contract.getProtocolParameters(),
-        "__gapOne",
-        "__gapTwo",
-        "__gapThree",
-        "__gapFour"
-      )
+        '__gapOne',
+        '__gapTwo',
+        '__gapThree',
+        '__gapFour',
+      ),
     );
   }
 
   public async getProtocolAddresses(): Promise<TProtocolAddresses> {
-    return struct(
-      omit(
-        await this._registryService.contract.getProtocolAddresses(),
-        "__gapOne",
-        "__gapTwo"
-      )
-    );
+    return struct(omit(await this._registryService.contract.getProtocolAddresses(), '__gapOne', '__gapTwo'));
   }
 
   public async getCore(): Promise<string> {

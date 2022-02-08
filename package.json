@@ -17,10 +17,18 @@
   "scripts": {
     "build": "tsc",
     "generate:types": "typechain --target=ethers-v5 'src/abi/*.json' --out-dir 'src/types/typechain'",
-    "generate:docs": "typedoc src/index.ts"
+    "generate:docs": "typedoc src/index.ts",
+    "lint": "prettier --config ./.prettierrc --check .",
+    "format": "prettier --config ./.prettierrc --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && git add -A ."
+    }
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "eslint-config-prettier": "^8.3.0",
     "ethers": "^5.5.2",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
@@ -30,8 +38,17 @@
     "@typechain/ethers-v5": "^9.0.0",
     "@types/chai": "^4.3.0",
     "@types/lodash": "^4.14.178",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "chai": "^4.3.4",
     "chai-ethers": "^0.0.1",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.4",
+    "i": "^0.3.7",
+    "npm": "^8.4.1",
+    "prettier": "^2.5.1",
     "ts-generator": "^0.1.1",
     "ts-node": "^10.4.0",
     "typechain": "^7.0.0",

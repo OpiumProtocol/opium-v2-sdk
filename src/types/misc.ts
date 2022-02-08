@@ -1,15 +1,11 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
+import { JsonRpcProvider } from '@ethersproject/providers';
 
-export const isProvider = (
-  arg: JsonRpcProvider | undefined
-): arg is JsonRpcProvider => {
-  return true;
-};
+export const isProvider = (arg: JsonRpcProvider | undefined): arg is JsonRpcProvider => true;
 
 export enum ENetworks {
   // GANACHE = "GANACHE",
-  GOERLI = "GOERLI",
-  ARBITRUM_TESTNET = "ARBITRUM_TESTNET",
+  GOERLI = 'GOERLI',
+  ARBITRUM_TESTNET = 'ARBITRUM_TESTNET',
 }
 
 export type valueof<T> = T[keyof T];
