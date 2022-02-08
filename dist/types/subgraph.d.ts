@@ -1,4 +1,4 @@
-import { TAddress } from ".";
+import { TAddress } from '.';
 export declare type TPosition = {
     id: string;
     name: string;

@@ -1,4 +1,4 @@
-import { BigNumberish } from "ethers";
+import { BigNumberish } from 'ethers';
 export declare type TDerivative = {
     margin: BigNumberish;
     endTime: number;

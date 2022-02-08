@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ENetworks = exports.isProvider = void 0;
-var isProvider = function (arg) {
-    return true;
-};
+var isProvider = function (arg) { return true; };
 exports.isProvider = isProvider;
 var ENetworks;
 (function (ENetworks) {

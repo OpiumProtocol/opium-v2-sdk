@@ -1,7 +1,7 @@
 {
   "name": "@opiumteam/opium-sdk-v2",
   "version": "1.0.0",
-  "description": "",
+  "description": "one-stop-shop SDK to interact with the Opium-v2 protocol contracts, subgraphs and APIs",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -11,9 +11,29 @@
     "src",
     "dist"
   ],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "DeFi",
+    "derivatives",
+    "options",
+    "opium-v2",
+    "subgraph",
+    "graphQL",
+    "typescript",
+    "sdk"
+  ],
+  "contributors": [
+    {
+      "name": "Riccardo Biosas",
+      "email": "rbios@protonmail.com"
+    },
+    {
+      "name": "Ali Nuraldin",
+      "email": "ali@opium.team"
+    }
+  ],
+  "license": "",
   "scripts": {
     "build": "tsc",
     "generate:types": "typechain --target=ethers-v5 'src/abi/*.json' --out-dir 'src/types/typechain'",

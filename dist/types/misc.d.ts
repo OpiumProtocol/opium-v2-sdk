@@ -1,4 +1,4 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
+import { JsonRpcProvider } from '@ethersproject/providers';
 export declare const isProvider: (arg: JsonRpcProvider | undefined) => arg is JsonRpcProvider;
 export declare enum ENetworks {
     GOERLI = "GOERLI",

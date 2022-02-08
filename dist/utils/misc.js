@@ -5,9 +5,7 @@ var bignumber_1 = require("@ethersproject/bignumber/lib/bignumber");
 var lodash_1 = require("lodash");
 var constants_1 = require("../constants");
 var configByChain = function (chainIds, chainId) {
-    var network = (0, lodash_1.findKey)(chainIds, function (id) {
-        return id === chainId;
-    });
+    var network = (0, lodash_1.findKey)(chainIds, function (id) { return id === chainId; });
     if (network) {
         return {
             registryAddress: constants_1.registryAddresses[network],
@@ -25,7 +23,7 @@ exports.configByChain = configByChain;
  */
 // convert tuples
 function struct(tuple) {
-    if (typeof tuple !== "object")
+    if (typeof tuple !== 'object')
         return tuple;
     var keys = Object.keys(tuple);
     // check if tuple is actually an array
@@ -37,7 +35,7 @@ function struct(tuple) {
     var copy = {};
     properties.forEach(function (property) {
         var value = tuple[property];
-        if (typeof value === "object" && !(0, bignumber_1.isBigNumberish)(value)) {
+        if (typeof value === 'object' && !(0, bignumber_1.isBigNumberish)(value)) {
             // recursive!
             copy[property] = struct(value);
         }

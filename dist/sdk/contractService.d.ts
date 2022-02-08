@@ -1,11 +1,10 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { Contract, ContractInterface } from "@ethersproject/contracts";
+import { providers, Contract, ContractInterface } from 'ethers';
 export declare class ContractService<T extends Contract> {
-    private readonly _address;
-    private readonly _abi;
-    private readonly _provider;
+    private readonly address$;
+    private readonly abi$;
+    private readonly provider$;
     readonly contract: T;
-    constructor(_address: string, _abi: ContractInterface, _provider: JsonRpcProvider);
+    constructor(_address: string, _abi: ContractInterface, _provider: providers.JsonRpcProvider);
     getAddress(): string;
-    getProvider(): JsonRpcProvider;
+    getProvider(): providers.JsonRpcProvider;
 }

@@ -1,5 +1,5 @@
-import { utils, BigNumberish, BigNumber } from 'ethers';
-import { cast, toBN } from '.';
+import { utils, BigNumberish } from 'ethers';
+import { cast, toBN } from './math';
 import { zeroAddress } from '../constants';
 import { TDerivative } from '../types';
 

@@ -1,3 +1,3 @@
-export * from './subgraph';
+export * from './subgraphService';
 export * from './wrappedContracts';
-export * from './simulator';
+export * from './simulatorService';

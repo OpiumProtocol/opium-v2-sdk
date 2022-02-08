@@ -9,12 +9,12 @@ exports.chainIds = (_a = {},
     _a);
 // proxy addresses
 exports.registryAddresses = (_b = {},
-    _b[types_1.ENetworks.GOERLI] = "0x7A667f935f767CbcBBd3B005a38C13448BfFEA70",
-    _b[types_1.ENetworks.ARBITRUM_TESTNET] = "0x9285CAA6F92D9Ba197966E854174e9B27B2061e5",
+    _b[types_1.ENetworks.GOERLI] = '0x7A667f935f767CbcBBd3B005a38C13448BfFEA70',
+    _b[types_1.ENetworks.ARBITRUM_TESTNET] = '0x9285CAA6F92D9Ba197966E854174e9B27B2061e5',
     _b);
 // proxy addresses
 exports.subgraphEndpoints = (_c = {},
-    _c[types_1.ENetworks.GOERLI] = "",
-    _c[types_1.ENetworks.ARBITRUM_TESTNET] = "https://api.thegraph.com/subgraphs/name/riccardobiosas/opium-v2-subgraph",
+    _c[types_1.ENetworks.GOERLI] = '',
+    _c[types_1.ENetworks.ARBITRUM_TESTNET] = 'https://api.thegraph.com/subgraphs/name/riccardobiosas/opium-v2-subgraph',
     _c);
 //# sourceMappingURL=networks.js.map
