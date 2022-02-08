@@ -13,7 +13,7 @@ export class ContractService<T extends Contract> {
     this.address$ = _address;
     this.abi$ = _abi;
     this.provider$ = _provider;
-    this.contract = <T>new Contract(this.address$, this.abi$, _provider);
+    this.contract = <T>new Contract(this.address$, this.abi$, this.provider$);
   }
 
   public getAddress(): string {
