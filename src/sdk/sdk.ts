@@ -6,6 +6,7 @@ import {
   SyntheticAggregatorContract,
   RegistryContract,
   SubgraphService,
+  SimulatorService,
 } from '../services';
 import { ContractService } from '.';
 import RegistryABI from '../abi/Registry.json';
@@ -39,6 +40,9 @@ export class OpiumV2SDK {
   // subgraph service
   public subgraphService: SubgraphService;
 
+  // simulator service
+  public simulatorService: SimulatorService;
+
   constructor(_config: IOpiumV2SDKConfig) {
     if (_config.override) {
       this._provider = new providers.Web3Provider(_config.override);
@@ -55,6 +59,8 @@ export class OpiumV2SDK {
     );
 
     this.subgraphService = new SubgraphService(networkConfig.subgraphEndpoint);
+
+    this.simulatorService = SimulatorService;
   }
 
   public async setup(): Promise<void> {
