@@ -1,5 +1,5 @@
 // theirs
-import { BigNumberish, providers } from 'ethers';
+import { BigNumberish, BigNumber, providers } from 'ethers';
 // services
 import { ContractService } from './contractService';
 import { TAddress, TDerivative } from '../../types';
@@ -14,7 +14,7 @@ export class DerivativeLensFactory {
     this.provider$ = _provider;
   }
 
-  public async getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumberish> {
+  public async getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumber> {
     const oracleAggregatorId = new ContractService<IOracleId>(_oracleIdAddress, ILiveFeedOracleIdABI, this.provider$);
     return oracleAggregatorId.contract.getResult();
   }
@@ -22,7 +22,7 @@ export class DerivativeLensFactory {
   public async getSyntheticIdExecutionPayout(
     _derivative: TDerivative,
     _strikeResult: BigNumberish,
-  ): Promise<[BigNumberish, BigNumberish]> {
+  ): Promise<[BigNumber, BigNumber]> {
     const syntheticId = new ContractService<IDerivativeLogic>(
       _derivative.syntheticId,
       IDerivativeLogicAbi,
