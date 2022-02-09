@@ -1,5 +1,5 @@
 import { CallOverrides } from "@ethersproject/contracts";
-import { BigNumber, ContractTransaction } from "ethers";
+import { BigNumber, BigNumberish, ContractTransaction } from "ethers";
 import { ContractService } from "../sdk";
 import { OracleAggregator } from "../types/typechain/OracleAggregator";
 
@@ -11,8 +11,8 @@ export class OracleAggregatorContract {
   }
 
   public async pushData(
-    _timestamp: BigNumber,
-    _data: BigNumber,
+    _timestamp: BigNumberish,
+    _data: BigNumberish,
     _overrides: CallOverrides = {}
   ): Promise<ContractTransaction> {
     const signer = (
@@ -25,7 +25,7 @@ export class OracleAggregatorContract {
 
   public async getData(
     _oracleId: string,
-    _timestamp: BigNumber,
+    _timestamp: BigNumberish,
     _overrides: CallOverrides = {}
   ): Promise<BigNumber> {
     return this._oracleAggregatorService.contract.getData(
@@ -37,7 +37,7 @@ export class OracleAggregatorContract {
 
   public async hasData(
     _oracleId: string,
-    _timestamp: BigNumber,
+    _timestamp: BigNumberish,
     _overrides: CallOverrides = {}
   ): Promise<boolean> {
     return this._oracleAggregatorService.contract.hasData(
