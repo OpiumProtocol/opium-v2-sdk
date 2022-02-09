@@ -2,14 +2,13 @@
 import { omit } from 'lodash';
 import { BigNumberish, Contract, CallOverrides, ContractReceipt } from 'ethers';
 // services
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 // types
 import { TProtocolAddresses, TProtocolParameters } from '../../types/contracts';
 import { TDerivative, TAddress } from '../../types/index';
 import { Core, IERC20 } from '../../types/typechain';
 import { IDerivativeLogic } from '../../types/typechain/IDerivativeLogic';
-import IERC20Abi from '../../abi/IERC20.json';
-import IDerivativeLogicAbi from '../../abi/IDerivativeLogic.json';
+import { IERC20Abi, IDerivativeLogicAbi } from '../../abi';
 // utils
 import { mulDiv, getDerivativeHash } from '../../utils/financial';
 import { struct } from '../../utils/misc';

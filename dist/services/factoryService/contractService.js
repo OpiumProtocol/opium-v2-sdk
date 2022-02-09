@@ -7,7 +7,7 @@ var ContractService = /** @class */ (function () {
         this.address$ = _address;
         this.abi$ = _abi;
         this.provider$ = _provider;
-        this.contract = new ethers_1.Contract(this.address$, this.abi$, _provider);
+        this.contract = new ethers_1.Contract(this.address$, this.abi$, this.provider$);
     }
     ContractService.prototype.getAddress = function () {
         return this.address$;

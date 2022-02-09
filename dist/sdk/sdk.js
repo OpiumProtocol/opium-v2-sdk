@@ -35,9 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpiumV2SDK = void 0;
 // theirs
@@ -49,15 +46,13 @@ var wrappedSyntheticAggregator_1 = require("../services/wrappedContracts/wrapped
 var wrappedRegistry_1 = require("../services/wrappedContracts/wrappedRegistry");
 var subgraphService_1 = require("../services/subgraphService/subgraphService");
 var simulatorService_1 = require("../services/simulatorService/simulatorService");
-var contractService_1 = require("./contractService");
+var contractService_1 = require("../services/factoryService/contractService");
 // types
-var Registry_json_1 = __importDefault(require("../abi/Registry.json"));
-var Core_json_1 = __importDefault(require("../abi/Core.json"));
-var OracleAggregator_json_1 = __importDefault(require("../abi/OracleAggregator.json"));
-var SyntheticAggregator_json_1 = __importDefault(require("../abi/SyntheticAggregator.json"));
+var abi_1 = require("../abi");
 // utils
 var constants_1 = require("../constants");
 var utils_1 = require("../utils");
+var factoryService_1 = require("../services/factoryService");
 var OpiumV2SDK = /** @class */ (function () {
     function OpiumV2SDK(_config) {
         if (_config.override) {
@@ -70,7 +65,7 @@ var OpiumV2SDK = /** @class */ (function () {
         if (!networkConfig) {
             throw new Error('unsupported chainId');
         }
-        this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(networkConfig.registryAddress, Registry_json_1.default, this.provider$));
+        this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(networkConfig.registryAddress, abi_1.RegistryABI, this.provider$));
         this.subgraphService = new subgraphService_1.SubgraphService(networkConfig.subgraphEndpoint);
         this.simulatorService = simulatorService_1.SimulatorService;
     }
@@ -82,13 +77,16 @@ var OpiumV2SDK = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.registryInstance.getProtocolAddresses()];
                     case 1:
                         protocolAddresses = _a.sent();
-                        this.coreInstance = new wrappedCore_1.WrappedCore(new contractService_1.ContractService(protocolAddresses.core, Core_json_1.default, this.provider$));
-                        this.oracleAggregatorInstance = new wrappedOracleAggregator_1.WrappedOracleAggregator(new contractService_1.ContractService(protocolAddresses.oracleAggregator, OracleAggregator_json_1.default, this.provider$));
-                        this.syntheticAggregatorInstance = new wrappedSyntheticAggregator_1.WrappedSyntheticAggregator(new contractService_1.ContractService(protocolAddresses.syntheticAggregator, SyntheticAggregator_json_1.default, this.provider$));
+                        this.coreInstance = new wrappedCore_1.WrappedCore(new contractService_1.ContractService(protocolAddresses.core, abi_1.CoreABI, this.provider$));
+                        this.oracleAggregatorInstance = new wrappedOracleAggregator_1.WrappedOracleAggregator(new contractService_1.ContractService(protocolAddresses.oracleAggregator, abi_1.OracleAggregatorABI, this.provider$));
+                        this.syntheticAggregatorInstance = new wrappedSyntheticAggregator_1.WrappedSyntheticAggregator(new contractService_1.ContractService(protocolAddresses.syntheticAggregator, abi_1.SyntheticAggregatorABI, this.provider$));
                         return [2 /*return*/];
                 }
             });
         });
+    };
+    OpiumV2SDK.prototype.initOracleId = function (_address) {
+        return new factoryService_1.OracleIdFactory(_address, this.provider$);
     };
     return OpiumV2SDK;
 }());

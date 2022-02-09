@@ -1,5 +1,5 @@
 import { CallOverrides } from 'ethers';
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 import { SyntheticAggregator } from '../../types/typechain/SyntheticAggregator';
 import { TDerivative } from '../../types/index';
 export declare class WrappedSyntheticAggregator {

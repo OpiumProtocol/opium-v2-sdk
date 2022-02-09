@@ -1,5 +1,5 @@
 import { BigNumberish, CallOverrides, ContractReceipt } from 'ethers';
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 import { TProtocolAddresses, TProtocolParameters } from '../../types/contracts';
 import { TDerivative, TAddress } from '../../types/index';
 import { Core } from '../../types/typechain';

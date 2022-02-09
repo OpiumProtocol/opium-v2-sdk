@@ -1,7 +1,7 @@
 // theirs
 import { CallOverrides } from 'ethers';
 // services
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 import { SyntheticAggregator } from '../../types/typechain/SyntheticAggregator';
 // types
 import { TDerivative } from '../../types/index';

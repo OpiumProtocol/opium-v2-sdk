@@ -6,7 +6,7 @@ import { TProtocolAddresses, TProtocolParameters } from '../../types/contracts';
 import { struct } from '../../utils/misc';
 // services
 import { Registry } from '../../types/typechain';
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 
 export class WrappedRegistry {
   private registryService$: ContractService<Registry>;

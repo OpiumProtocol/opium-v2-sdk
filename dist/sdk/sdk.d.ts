@@ -6,6 +6,7 @@ import { WrappedRegistry } from '../services/wrappedContracts/wrappedRegistry';
 import { SubgraphService } from '../services/subgraphService/subgraphService';
 import { SimulatorService } from '../services/simulatorService/simulatorService';
 import { chainIds } from '../constants';
+import { OracleIdFactory } from '../services/factoryService';
 export interface IOpiumV2SDKConfig {
     rpcUrl: string;
     chainId: typeof chainIds[keyof typeof chainIds];
@@ -21,4 +22,5 @@ export declare class OpiumV2SDK {
     simulatorService: SimulatorService;
     constructor(_config: IOpiumV2SDKConfig);
     setup(): Promise<void>;
+    initOracleId(_address: string): OracleIdFactory;
 }

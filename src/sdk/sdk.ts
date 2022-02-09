@@ -7,17 +7,15 @@ import { WrappedSyntheticAggregator } from '../services/wrappedContracts/wrapped
 import { WrappedRegistry } from '../services/wrappedContracts/wrappedRegistry';
 import { SubgraphService } from '../services/subgraphService/subgraphService';
 import { SimulatorService } from '../services/simulatorService/simulatorService';
-import { ContractService } from './contractService';
+import { ContractService } from '../services/factoryService/contractService';
 // types
-import RegistryABI from '../abi/Registry.json';
-import CoreABI from '../abi/Core.json';
-import OracleAggregatorABI from '../abi/OracleAggregator.json';
-import SyntheticAggregatorABI from '../abi/SyntheticAggregator.json';
+import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } from '../abi';
 import { Core, OracleAggregator, Registry } from '../types/typechain';
 import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
 // utils
 import { chainIds } from '../constants';
 import { configByChain } from '../utils';
+import { OracleIdFactory } from '../services/factoryService';
 
 export interface IOpiumV2SDKConfig {
   // use a known network or provide an entirely custom config
@@ -80,5 +78,9 @@ export class OpiumV2SDK {
         this.provider$,
       ),
     );
+  }
+
+  public initOracleId(_address: string): OracleIdFactory {
+    return new OracleIdFactory(_address, this.provider$);
   }
 }

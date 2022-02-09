@@ -35,16 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WrappedCore = void 0;
 // theirs
 var lodash_1 = require("lodash");
 var ethers_1 = require("ethers");
-var IERC20_json_1 = __importDefault(require("../../abi/IERC20.json"));
-var IDerivativeLogic_json_1 = __importDefault(require("../../abi/IDerivativeLogic.json"));
+var abi_1 = require("../../abi");
 // utils
 var financial_1 = require("../../utils/financial");
 var misc_1 = require("../../utils/misc");
@@ -65,7 +61,7 @@ var WrappedCore = /** @class */ (function () {
                         return [4 /*yield*/, this.coreService$.contract.getProtocolAddresses()];
                     case 2:
                         tokenSpenderAddress = _a.sent();
-                        token = new ethers_1.Contract(_derivative.token, IERC20_json_1.default, this.coreService$.getProvider());
+                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.getProvider());
                         return [4 /*yield*/, this.computeDerivativeMargin$(_derivative, _amount)];
                     case 3:
                         requiredMargin = _a.sent();
@@ -94,7 +90,7 @@ var WrappedCore = /** @class */ (function () {
                         return [4 /*yield*/, this.coreService$.contract.getProtocolAddresses()];
                     case 2:
                         tokenSpenderAddress = _a.sent();
-                        token = new ethers_1.Contract(_derivative.token, IERC20_json_1.default, this.coreService$.getProvider());
+                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.getProvider());
                         return [4 /*yield*/, this.computeDerivativeMargin$(_derivative, _amount)];
                     case 3:
                         requiredMargin = _a.sent();
@@ -370,7 +366,7 @@ var WrappedCore = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        syntheticId = (new ethers_1.Contract(_derivative.syntheticId, IDerivativeLogic_json_1.default, this.coreService$.getProvider()));
+                        syntheticId = (new ethers_1.Contract(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.coreService$.getProvider()));
                         return [4 /*yield*/, syntheticId.getMargin(_derivative)];
                     case 1:
                         _a = _b.sent(), buyerMargin = _a[0], sellerMargin = _a[1];

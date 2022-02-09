@@ -1,7 +1,7 @@
 // theirs
 import { BigNumber, ContractTransaction, CallOverrides } from 'ethers';
 // services
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 // types
 import { OracleAggregator } from '../../types/typechain/OracleAggregator';
 

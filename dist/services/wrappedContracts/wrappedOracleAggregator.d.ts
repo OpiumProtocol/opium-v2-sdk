@@ -1,5 +1,5 @@
 import { BigNumber, ContractTransaction, CallOverrides } from 'ethers';
-import { ContractService } from '../../sdk/contractService';
+import { ContractService } from '../factoryService/contractService';
 import { OracleAggregator } from '../../types/typechain/OracleAggregator';
 export declare class WrappedOracleAggregator {
     private oracleAggregatorService$;
