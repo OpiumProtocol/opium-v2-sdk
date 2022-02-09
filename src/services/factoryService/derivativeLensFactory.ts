@@ -20,11 +20,14 @@ export class DerivativeLensFactory {
   }
 
   public async getSyntheticIdExecutionPayout(
-    _syntheticIdAddress: TAddress,
     _derivative: TDerivative,
     _strikeResult: BigNumberish,
   ): Promise<[BigNumberish, BigNumberish]> {
-    const syntheticId = new ContractService<IDerivativeLogic>(_syntheticIdAddress, IDerivativeLogicAbi, this.provider$);
+    const syntheticId = new ContractService<IDerivativeLogic>(
+      _derivative.syntheticId,
+      IDerivativeLogicAbi,
+      this.provider$,
+    );
     return syntheticId.contract.getExecutionPayout(_derivative, _strikeResult);
   }
 }
