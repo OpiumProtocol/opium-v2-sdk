@@ -4,5 +4,5 @@ export declare class DerivativeLensFactory {
     private readonly provider$;
     constructor(_provider: providers.JsonRpcProvider);
     getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumberish>;
-    getSyntheticIdExecutionPayout(_syntheticIdAddress: TAddress, _derivative: TDerivative, _strikeResult: BigNumberish): Promise<[BigNumberish, BigNumberish]>;
+    getSyntheticIdExecutionPayout(_derivative: TDerivative, _strikeResult: BigNumberish): Promise<[BigNumberish, BigNumberish]>;
 }

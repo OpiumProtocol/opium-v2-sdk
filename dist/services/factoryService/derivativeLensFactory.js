@@ -54,11 +54,11 @@ var DerivativeLensFactory = /** @class */ (function () {
             });
         });
     };
-    DerivativeLensFactory.prototype.getSyntheticIdExecutionPayout = function (_syntheticIdAddress, _derivative, _strikeResult) {
+    DerivativeLensFactory.prototype.getSyntheticIdExecutionPayout = function (_derivative, _strikeResult) {
         return __awaiter(this, void 0, void 0, function () {
             var syntheticId;
             return __generator(this, function (_a) {
-                syntheticId = new contractService_1.ContractService(_syntheticIdAddress, abi_1.IDerivativeLogicAbi, this.provider$);
+                syntheticId = new contractService_1.ContractService(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.provider$);
                 return [2 /*return*/, syntheticId.contract.getExecutionPayout(_derivative, _strikeResult)];
             });
         });

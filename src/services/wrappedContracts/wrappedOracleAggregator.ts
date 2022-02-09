@@ -1,5 +1,5 @@
 // theirs
-import { BigNumber, ContractTransaction, CallOverrides } from 'ethers';
+import { BigNumberish, ContractTransaction, CallOverrides } from 'ethers';
 // services
 import { ContractService } from '../factoryService/contractService';
 // types
@@ -13,8 +13,8 @@ export class WrappedOracleAggregator {
   }
 
   public async pushData(
-    _timestamp: BigNumber,
-    _data: BigNumber,
+    _timestamp: BigNumberish,
+    _data: BigNumberish,
     _overrides: CallOverrides = {},
   ): Promise<ContractTransaction> {
     const signer = (await this.oracleAggregatorService$.getProvider()).getSigner();
@@ -22,11 +22,15 @@ export class WrappedOracleAggregator {
     return this.oracleAggregatorService$.contract.connect(signer).__callback(_timestamp, _data, _overrides);
   }
 
-  public async getData(_oracleId: string, _timestamp: BigNumber, _overrides: CallOverrides = {}): Promise<BigNumber> {
+  public async getData(
+    _oracleId: string,
+    _timestamp: BigNumberish,
+    _overrides: CallOverrides = {},
+  ): Promise<BigNumberish> {
     return this.oracleAggregatorService$.contract.getData(_oracleId, _timestamp, _overrides);
   }
 
-  public async hasData(_oracleId: string, _timestamp: BigNumber, _overrides: CallOverrides = {}): Promise<boolean> {
+  public async hasData(_oracleId: string, _timestamp: BigNumberish, _overrides: CallOverrides = {}): Promise<boolean> {
     return this.oracleAggregatorService$.contract.hasData(_oracleId, _timestamp, _overrides);
   }
 }
