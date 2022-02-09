@@ -1,5 +1,5 @@
 // theirs
-import { CallOverrides } from 'ethers';
+import { CallOverrides, ContractTransaction } from 'ethers';
 // services
 import { ContractService } from '../factoryService/contractService';
 import { SyntheticAggregator } from '../../types/typechain/SyntheticAggregator';
@@ -16,7 +16,10 @@ export class WrappedSyntheticAggregator {
     this.syntheticAggregatorService$ = _syntheticAggregatorService;
   }
 
-  public async getOrCacheMargin(_derivative: TDerivative, _overrides: CallOverrides = {}) {
+  public async getOrCacheMargin(
+    _derivative: TDerivative,
+    _overrides: CallOverrides = {},
+  ): Promise<ContractTransaction> {
     const signer = (await this.syntheticAggregatorService$.getProvider()).getSigner();
     const derivativeHash = getDerivativeHash(_derivative);
     return this.syntheticAggregatorService$.contract
@@ -24,7 +27,10 @@ export class WrappedSyntheticAggregator {
       .getOrCacheMargin(derivativeHash, _derivative, _overrides);
   }
 
-  public async getOrCacheSyntheticCache(_derivative: TDerivative, _overrides: CallOverrides = {}) {
+  public async getOrCacheSyntheticCache(
+    _derivative: TDerivative,
+    _overrides: CallOverrides = {},
+  ): Promise<ContractTransaction> {
     const signer = (await this.syntheticAggregatorService$.getProvider()).getSigner();
     const derivativeHash = getDerivativeHash(_derivative);
     return struct(

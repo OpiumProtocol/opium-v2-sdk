@@ -36,23 +36,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OracleIdFactory = void 0;
+exports.DerivativeLensFactory = void 0;
 // services
 var contractService_1 = require("./contractService");
 // types
 var abi_1 = require("../../abi");
-var OracleIdFactory = /** @class */ (function () {
-    function OracleIdFactory(_oracleIdAddress, _provider) {
-        this.oracleAggregatorId$ = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, _provider);
+var DerivativeLensFactory = /** @class */ (function () {
+    function DerivativeLensFactory(_provider) {
+        this.provider$ = _provider;
     }
-    OracleIdFactory.prototype.getResult = function () {
+    DerivativeLensFactory.prototype.getOracleIdResult = function (_oracleIdAddress) {
         return __awaiter(this, void 0, void 0, function () {
+            var oracleAggregatorId;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.oracleAggregatorId$.contract.getResult()];
+                oracleAggregatorId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
+                return [2 /*return*/, oracleAggregatorId.contract.getResult()];
             });
         });
     };
-    return OracleIdFactory;
+    DerivativeLensFactory.prototype.getSyntheticIdExecutionPayout = function (_syntheticIdAddress, _derivative, _strikeResult) {
+        return __awaiter(this, void 0, void 0, function () {
+            var syntheticId;
+            return __generator(this, function (_a) {
+                syntheticId = new contractService_1.ContractService(_syntheticIdAddress, abi_1.IDerivativeLogicAbi, this.provider$);
+                return [2 /*return*/, syntheticId.contract.getExecutionPayout(_derivative, _strikeResult)];
+            });
+        });
+    };
+    return DerivativeLensFactory;
 }());
-exports.OracleIdFactory = OracleIdFactory;
-//# sourceMappingURL=oracleIdFactory.js.map
+exports.DerivativeLensFactory = DerivativeLensFactory;
+//# sourceMappingURL=derivativeLensFactory.js.map

@@ -68,6 +68,7 @@ var OpiumV2SDK = /** @class */ (function () {
         this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(networkConfig.registryAddress, abi_1.RegistryABI, this.provider$));
         this.subgraphService = new subgraphService_1.SubgraphService(networkConfig.subgraphEndpoint);
         this.simulatorService = simulatorService_1.SimulatorService;
+        this.derivativeLensFactory = new factoryService_1.DerivativeLensFactory(this.provider$);
     }
     OpiumV2SDK.prototype.setup = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -84,9 +85,6 @@ var OpiumV2SDK = /** @class */ (function () {
                 }
             });
         });
-    };
-    OpiumV2SDK.prototype.initOracleId = function (_address) {
-        return new factoryService_1.OracleIdFactory(_address, this.provider$);
     };
     return OpiumV2SDK;
 }());

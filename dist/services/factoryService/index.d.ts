@@ -1,2 +1,2 @@
 export * from './contractService';
-export * from './oracleIdFactory';
+export * from './derivativeLensFactory';

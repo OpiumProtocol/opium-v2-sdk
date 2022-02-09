@@ -15,7 +15,7 @@ import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
 // utils
 import { chainIds } from '../constants';
 import { configByChain } from '../utils';
-import { OracleIdFactory } from '../services/factoryService';
+import { DerivativeLensFactory } from '../services/factoryService';
 
 export interface IOpiumV2SDKConfig {
   // use a known network or provide an entirely custom config
@@ -42,6 +42,8 @@ export class OpiumV2SDK {
   // simulator service
   public simulatorService: SimulatorService;
 
+  public derivativeLensFactory: DerivativeLensFactory;
+
   constructor(_config: IOpiumV2SDKConfig) {
     if (_config.override) {
       this.provider$ = new providers.Web3Provider(_config.override);
@@ -60,6 +62,8 @@ export class OpiumV2SDK {
     this.subgraphService = new SubgraphService(networkConfig.subgraphEndpoint);
 
     this.simulatorService = SimulatorService;
+
+    this.derivativeLensFactory = new DerivativeLensFactory(this.provider$);
   }
 
   public async setup(): Promise<void> {
@@ -78,9 +82,5 @@ export class OpiumV2SDK {
         this.provider$,
       ),
     );
-  }
-
-  public initOracleId(_address: string): OracleIdFactory {
-    return new OracleIdFactory(_address, this.provider$);
   }
 }

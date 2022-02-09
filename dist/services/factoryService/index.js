@@ -11,5 +11,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./contractService"), exports);
-__exportStar(require("./oracleIdFactory"), exports);
+__exportStar(require("./derivativeLensFactory"), exports);
 //# sourceMappingURL=index.js.map
