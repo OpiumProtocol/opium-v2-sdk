@@ -1,5 +1,5 @@
 // theirs
-import { BigNumberish, ContractTransaction, CallOverrides } from 'ethers';
+import { BigNumber, BigNumberish, ContractTransaction, CallOverrides } from 'ethers';
 // services
 import { ContractService } from '../factoryService/contractService';
 // types
@@ -26,7 +26,7 @@ export class WrappedOracleAggregator {
     _oracleId: string,
     _timestamp: BigNumberish,
     _overrides: CallOverrides = {},
-  ): Promise<BigNumberish> {
+  ): Promise<BigNumber> {
     return this.oracleAggregatorService$.contract.getData(_oracleId, _timestamp, _overrides);
   }
 
