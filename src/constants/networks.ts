@@ -12,6 +12,12 @@ export const registryAddresses = {
 };
 
 // proxy addresses
+export const onChainPositionLensAddresses = {
+  [ENetworks.GOERLI]: '',
+  [ENetworks.ARBITRUM_TESTNET]: '0x4b214b8aafbdeb170b550bb2dfed41aadd9acf74',
+};
+
+// subgraph endpoints
 export const subgraphEndpoints = {
   [ENetworks.GOERLI]: '',
   [ENetworks.ARBITRUM_TESTNET]: 'https://api.thegraph.com/subgraphs/name/riccardobiosas/opium-v2-subgraph',

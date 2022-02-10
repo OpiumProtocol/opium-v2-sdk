@@ -5,8 +5,8 @@ import { WrappedSyntheticAggregator } from '../services/wrappedContracts/wrapped
 import { WrappedRegistry } from '../services/wrappedContracts/wrappedRegistry';
 import { SubgraphService } from '../services/subgraphService/subgraphService';
 import { SimulatorService } from '../services/simulatorService/simulatorService';
-import { chainIds } from '../constants';
 import { DerivativeLensFactory } from '../services/factoryService';
+import { chainIds } from '../constants';
 export interface IOpiumV2SDKConfig {
     rpcUrl: string;
     chainId: typeof chainIds[keyof typeof chainIds];

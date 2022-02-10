@@ -18,3 +18,8 @@ export type TConfigByChain = {
 };
 
 export type TConfigByChainOrUndefined = TConfigByChain | undefined;
+
+export type TPositionsAddressesOutput = {
+  longPositionAddress: TAddress;
+  shortPositionAddress: TAddress;
+};

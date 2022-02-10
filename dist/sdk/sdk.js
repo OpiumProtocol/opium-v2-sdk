@@ -47,12 +47,12 @@ var wrappedRegistry_1 = require("../services/wrappedContracts/wrappedRegistry");
 var subgraphService_1 = require("../services/subgraphService/subgraphService");
 var simulatorService_1 = require("../services/simulatorService/simulatorService");
 var contractService_1 = require("../services/factoryService/contractService");
+var factoryService_1 = require("../services/factoryService");
 // types
 var abi_1 = require("../abi");
 // utils
 var constants_1 = require("../constants");
 var utils_1 = require("../utils");
-var factoryService_1 = require("../services/factoryService");
 var OpiumV2SDK = /** @class */ (function () {
     function OpiumV2SDK(_config) {
         if (_config.override) {
@@ -67,7 +67,7 @@ var OpiumV2SDK = /** @class */ (function () {
         }
         this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(networkConfig.registryAddress, abi_1.RegistryABI, this.provider$));
         this.subgraphService = new subgraphService_1.SubgraphService(networkConfig.subgraphEndpoint);
-        this.simulatorService = simulatorService_1.SimulatorService;
+        this.simulatorService = new simulatorService_1.SimulatorService(this.provider$);
         this.derivativeLensFactory = new factoryService_1.DerivativeLensFactory(this.provider$);
     }
     OpiumV2SDK.prototype.setup = function () {

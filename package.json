@@ -36,7 +36,7 @@
   "license": "",
   "scripts": {
     "build": "tsc",
-    "generate:types": "typechain --target=ethers-v5 'src/abi/*.json' --out-dir 'src/types/typechain'",
+    "generate:types": "typechain --target=ethers-v5 'src/abi/**/*.json' --out-dir 'src/types/typechain'",
     "generate:docs": "typedoc src/index.ts",
     "lint": "prettier --config ./.prettierrc --check .",
     "format": "prettier --config ./.prettierrc --write ."

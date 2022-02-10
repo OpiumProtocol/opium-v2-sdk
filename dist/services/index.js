@@ -13,4 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./subgraphService"), exports);
 __exportStar(require("./wrappedContracts"), exports);
 __exportStar(require("./simulatorService"), exports);
+__exportStar(require("./factoryService"), exports);
 //# sourceMappingURL=index.js.map

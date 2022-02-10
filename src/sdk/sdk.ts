@@ -8,6 +8,7 @@ import { WrappedRegistry } from '../services/wrappedContracts/wrappedRegistry';
 import { SubgraphService } from '../services/subgraphService/subgraphService';
 import { SimulatorService } from '../services/simulatorService/simulatorService';
 import { ContractService } from '../services/factoryService/contractService';
+import { DerivativeLensFactory } from '../services/factoryService';
 // types
 import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } from '../abi';
 import { Core, OracleAggregator, Registry } from '../types/typechain';
@@ -15,7 +16,6 @@ import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
 // utils
 import { chainIds } from '../constants';
 import { configByChain } from '../utils';
-import { DerivativeLensFactory } from '../services/factoryService';
 
 export interface IOpiumV2SDKConfig {
   // use a known network or provide an entirely custom config
@@ -61,7 +61,7 @@ export class OpiumV2SDK {
 
     this.subgraphService = new SubgraphService(networkConfig.subgraphEndpoint);
 
-    this.simulatorService = SimulatorService;
+    this.simulatorService = new SimulatorService(this.provider$);
 
     this.derivativeLensFactory = new DerivativeLensFactory(this.provider$);
   }

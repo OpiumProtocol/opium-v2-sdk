@@ -47,10 +47,11 @@ var DerivativeLensFactory = /** @class */ (function () {
     }
     DerivativeLensFactory.prototype.getOracleIdResult = function (_oracleIdAddress) {
         return __awaiter(this, void 0, void 0, function () {
-            var oracleAggregatorId;
+            var oracleId;
             return __generator(this, function (_a) {
-                oracleAggregatorId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
-                return [2 /*return*/, oracleAggregatorId.contract.getResult()];
+                oracleId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
+                // TODO: to be changed once the ILiveFeedOracleId.getResult() will be of `view` type
+                return [2 /*return*/, oracleId.contract.callStatic.getResult()];
             });
         });
     };

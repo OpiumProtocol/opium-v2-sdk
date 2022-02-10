@@ -11,3 +11,7 @@ export declare type TConfigByChain = {
     subgraphEndpoint: string;
 };
 export declare type TConfigByChainOrUndefined = TConfigByChain | undefined;
+export declare type TPositionsAddressesOutput = {
+    longPositionAddress: TAddress;
+    shortPositionAddress: TAddress;
+};
