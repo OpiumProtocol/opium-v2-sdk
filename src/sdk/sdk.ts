@@ -13,8 +13,9 @@ import { DerivativeLensFactory } from '../services/factoryService';
 import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } from '../abi';
 import { Core, OracleAggregator, Registry } from '../types/typechain';
 import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
-// utils
-import { chainIds } from '../constants';
+// utils & constant
+import { SDKError } from '../common';
+import { chainIds, sdkErrors } from '../constants';
 import { configByChain } from '../utils';
 
 export interface IOpiumV2SDKConfig {
@@ -25,7 +26,7 @@ export interface IOpiumV2SDKConfig {
 }
 
 export class OpiumV2SDK {
-  private readonly provider$: providers.JsonRpcProvider;
+  public readonly provider$: providers.JsonRpcProvider;
 
   // smart contracts' services
   public registryInstance: WrappedRegistry;
@@ -52,7 +53,7 @@ export class OpiumV2SDK {
     }
     const networkConfig = configByChain(chainIds, _config.chainId);
     if (!networkConfig) {
-      throw new Error('unsupported chainId');
+      throw new SDKError(sdkErrors.UNSUPPORTED_CHAIN);
     }
 
     this.registryInstance = new WrappedRegistry(

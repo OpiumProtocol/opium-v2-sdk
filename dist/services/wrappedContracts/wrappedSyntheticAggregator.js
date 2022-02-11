@@ -37,9 +37,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WrappedSyntheticAggregator = void 0;
+// types
+var misc_1 = require("../../types/misc");
 // utils
-var misc_1 = require("../../utils/misc");
+var common_1 = require("../../common");
+var misc_2 = require("../../utils/misc");
 var financial_1 = require("../../utils/financial");
+var utils_1 = require("../../utils");
 var WrappedSyntheticAggregator = /** @class */ (function () {
     function WrappedSyntheticAggregator(_syntheticAggregatorService) {
         this.syntheticAggregatorService$ = _syntheticAggregatorService;
@@ -47,16 +51,30 @@ var WrappedSyntheticAggregator = /** @class */ (function () {
     WrappedSyntheticAggregator.prototype.getOrCacheMargin = function (_derivative, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var signer, derivativeHash;
+            var signer, derivativeHash, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
                         return [2 /*return*/, this.syntheticAggregatorService$.contract
                                 .connect(signer)
                                 .getOrCacheMargin(derivativeHash, _derivative, _overrides)];
+                    case 2:
+                        error_1 = _a.sent();
+                        if ((0, misc_1.isErrorReasonExplicit)(error_1)) {
+                            if ((0, utils_1.pickError)(error_1.reason)) {
+                                throw new common_1.SDKError((0, utils_1.pickError)(error_1.reason));
+                            }
+                        }
+                        if (error_1 instanceof Error) {
+                            throw new Error(error_1.message);
+                        }
+                        throw Error;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
@@ -64,18 +82,32 @@ var WrappedSyntheticAggregator = /** @class */ (function () {
     WrappedSyntheticAggregator.prototype.getOrCacheSyntheticCache = function (_derivative, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var signer, derivativeHash, _a;
+            var signer, derivativeHash, _a, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
+                    case 0:
+                        _b.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
                     case 1:
                         signer = (_b.sent()).getSigner();
                         derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
-                        _a = misc_1.struct;
+                        _a = misc_2.struct;
                         return [4 /*yield*/, this.syntheticAggregatorService$.contract
                                 .connect(signer)
                                 .getOrCacheSyntheticCache(derivativeHash, _derivative, _overrides)];
                     case 2: return [2 /*return*/, _a.apply(void 0, [_b.sent()])];
+                    case 3:
+                        error_2 = _b.sent();
+                        if ((0, misc_1.isErrorReasonExplicit)(error_2)) {
+                            if ((0, utils_1.pickError)(error_2.reason)) {
+                                throw new common_1.SDKError((0, utils_1.pickError)(error_2.reason));
+                            }
+                        }
+                        if (error_2 instanceof Error) {
+                            throw new Error(error_2.message);
+                        }
+                        throw Error;
+                    case 4: return [2 /*return*/];
                 }
             });
         });

@@ -40,16 +40,14 @@ export interface ILiveFeedOracleId extends BaseContract {
         _callback(timestamp: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        getResult(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
+        getResult(overrides?: CallOverrides): Promise<[BigNumber] & {
+            result: BigNumber;
+        }>;
     };
     _callback(timestamp: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    getResult(overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
+    getResult(overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
         _callback(timestamp: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getResult(overrides?: CallOverrides): Promise<BigNumber>;
@@ -62,16 +60,12 @@ export interface ILiveFeedOracleId extends BaseContract {
         _callback(timestamp: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        getResult(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
+        getResult(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         _callback(timestamp: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        getResult(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
+        getResult(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

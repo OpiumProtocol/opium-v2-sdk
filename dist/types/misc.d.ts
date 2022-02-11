@@ -15,3 +15,7 @@ export declare type TPositionsAddressesOutput = {
     longPositionAddress: TAddress;
     shortPositionAddress: TAddress;
 };
+export interface ErrorWithReason extends Error {
+    reason: any;
+}
+export declare const isErrorReasonExplicit: (error: any) => error is ErrorWithReason;

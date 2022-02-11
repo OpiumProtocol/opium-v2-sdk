@@ -23,3 +23,10 @@ export type TPositionsAddressesOutput = {
   longPositionAddress: TAddress;
   shortPositionAddress: TAddress;
 };
+
+export interface ErrorWithReason extends Error {
+  reason: any;
+}
+
+// type-guard to assert the `.reason` field in an Error object at run-time
+export const isErrorReasonExplicit = (error: any): error is ErrorWithReason => error && error.reason;

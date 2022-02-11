@@ -40,7 +40,11 @@ exports.DerivativeLensFactory = void 0;
 // services
 var contractService_1 = require("./contractService");
 // types
+var misc_1 = require("../../types/misc");
 var abi_1 = require("../../abi");
+// utils
+var common_1 = require("../../common");
+var utils_1 = require("../../utils");
 var DerivativeLensFactory = /** @class */ (function () {
     function DerivativeLensFactory(_provider) {
         this.provider$ = _provider;
@@ -49,9 +53,22 @@ var DerivativeLensFactory = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var oracleId;
             return __generator(this, function (_a) {
-                oracleId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
-                // TODO: to be changed once the ILiveFeedOracleId.getResult() will be of `view` type
-                return [2 /*return*/, oracleId.contract.callStatic.getResult()];
+                try {
+                    oracleId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
+                    return [2 /*return*/, oracleId.contract.getResult()];
+                }
+                catch (error) {
+                    if ((0, misc_1.isErrorReasonExplicit)(error)) {
+                        if ((0, utils_1.pickError)(error.reason)) {
+                            throw new common_1.SDKError((0, utils_1.pickError)(error.reason));
+                        }
+                    }
+                    if (error instanceof Error) {
+                        throw new Error(error.message);
+                    }
+                    throw Error;
+                }
+                return [2 /*return*/];
             });
         });
     };
@@ -59,8 +76,22 @@ var DerivativeLensFactory = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var syntheticId;
             return __generator(this, function (_a) {
-                syntheticId = new contractService_1.ContractService(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.provider$);
-                return [2 /*return*/, syntheticId.contract.getExecutionPayout(_derivative, _strikeResult)];
+                try {
+                    syntheticId = new contractService_1.ContractService(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.provider$);
+                    return [2 /*return*/, syntheticId.contract.getExecutionPayout(_derivative, _strikeResult)];
+                }
+                catch (error) {
+                    if ((0, misc_1.isErrorReasonExplicit)(error)) {
+                        if ((0, utils_1.pickError)(error.reason)) {
+                            throw new common_1.SDKError((0, utils_1.pickError)(error.reason));
+                        }
+                    }
+                    if (error instanceof Error) {
+                        throw new Error(error.message);
+                    }
+                    throw Error;
+                }
+                return [2 /*return*/];
             });
         });
     };

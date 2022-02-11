@@ -50,7 +50,8 @@ var contractService_1 = require("../services/factoryService/contractService");
 var factoryService_1 = require("../services/factoryService");
 // types
 var abi_1 = require("../abi");
-// utils
+// utils & constant
+var common_1 = require("../common");
 var constants_1 = require("../constants");
 var utils_1 = require("../utils");
 var OpiumV2SDK = /** @class */ (function () {
@@ -63,7 +64,7 @@ var OpiumV2SDK = /** @class */ (function () {
         }
         var networkConfig = (0, utils_1.configByChain)(constants_1.chainIds, _config.chainId);
         if (!networkConfig) {
-            throw new Error('unsupported chainId');
+            throw new common_1.SDKError(constants_1.sdkErrors.UNSUPPORTED_CHAIN);
         }
         this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(networkConfig.registryAddress, abi_1.RegistryABI, this.provider$));
         this.subgraphService = new subgraphService_1.SubgraphService(networkConfig.subgraphEndpoint);

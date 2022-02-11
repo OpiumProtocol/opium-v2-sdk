@@ -13,7 +13,7 @@ export interface IOpiumV2SDKConfig {
     override?: providers.ExternalProvider;
 }
 export declare class OpiumV2SDK {
-    private readonly provider$;
+    readonly provider$: providers.JsonRpcProvider;
     registryInstance: WrappedRegistry;
     coreInstance: WrappedCore | undefined;
     oracleAggregatorInstance: WrappedOracleAggregator | undefined;

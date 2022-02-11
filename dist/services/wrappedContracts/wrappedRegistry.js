@@ -39,39 +39,69 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WrappedRegistry = void 0;
 // theirs
 var lodash_1 = require("lodash");
+// types
+var misc_1 = require("../../types/misc");
 // utils
-var misc_1 = require("../../utils/misc");
+var misc_2 = require("../../utils/misc");
+var common_1 = require("../../common");
+var utils_1 = require("../../utils");
 var WrappedRegistry = /** @class */ (function () {
     function WrappedRegistry(_registryService) {
         this.registryService$ = _registryService;
     }
     WrappedRegistry.prototype.getProtocolParameters = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, _b;
+            var _a, _b, error_1;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        _a = misc_1.struct;
+                        _c.trys.push([0, 2, , 3]);
+                        _a = misc_2.struct;
                         _b = lodash_1.omit;
                         return [4 /*yield*/, this.registryService$.contract.getProtocolParameters()];
                     case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), '__gapOne',
                                 '__gapTwo',
                                 '__gapThree',
                                 '__gapFour'])])];
+                    case 2:
+                        error_1 = _c.sent();
+                        if ((0, misc_1.isErrorReasonExplicit)(error_1)) {
+                            if ((0, utils_1.pickError)(error_1.reason)) {
+                                throw new common_1.SDKError((0, utils_1.pickError)(error_1.reason));
+                            }
+                        }
+                        if (error_1 instanceof Error) {
+                            throw new Error(error_1.message);
+                        }
+                        throw Error;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
     WrappedRegistry.prototype.getProtocolAddresses = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, _b;
+            var _a, _b, error_2;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        _a = misc_1.struct;
+                        _c.trys.push([0, 2, , 3]);
+                        _a = misc_2.struct;
                         _b = lodash_1.omit;
                         return [4 /*yield*/, this.registryService$.contract.getProtocolAddresses()];
                     case 1: return [2 /*return*/, _a.apply(void 0, [_b.apply(void 0, [_c.sent(), '__gapOne', '__gapTwo'])])];
+                    case 2:
+                        error_2 = _c.sent();
+                        if ((0, misc_1.isErrorReasonExplicit)(error_2)) {
+                            if ((0, utils_1.pickError)(error_2.reason)) {
+                                throw new common_1.SDKError((0, utils_1.pickError)(error_2.reason));
+                            }
+                        }
+                        if (error_2 instanceof Error) {
+                            throw new Error(error_2.message);
+                        }
+                        throw Error;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
@@ -79,7 +109,21 @@ var WrappedRegistry = /** @class */ (function () {
     WrappedRegistry.prototype.getCore = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.registryService$.contract.getCore()];
+                try {
+                    return [2 /*return*/, this.registryService$.contract.getCore()];
+                }
+                catch (error) {
+                    if ((0, misc_1.isErrorReasonExplicit)(error)) {
+                        if ((0, utils_1.pickError)(error.reason)) {
+                            throw new common_1.SDKError((0, utils_1.pickError)(error.reason));
+                        }
+                    }
+                    if (error instanceof Error) {
+                        throw new Error(error.message);
+                    }
+                    throw Error;
+                }
+                return [2 /*return*/];
             });
         });
     };

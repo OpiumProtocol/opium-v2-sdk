@@ -1,7 +1,21 @@
 import { isBigNumberish } from '@ethersproject/bignumber/lib/bignumber';
 import { findKey } from 'lodash';
 import { registryAddresses, subgraphEndpoints } from '../constants';
+import { protocolErrors, semanticErrors } from '../constants/protocolErrors';
 import { ENetworks, TConfigByChainOrUndefined } from '../types';
+
+export const pickError = (
+  semanticError: typeof semanticErrors[keyof typeof semanticErrors],
+): typeof protocolErrors[keyof typeof semanticErrors] => {
+  console.log('semanticError::: ', semanticError);
+
+  const protocolError = findKey(protocolErrors, error => error === semanticError);
+  console.log('protocolError::: ', protocolError);
+  if (protocolError) {
+    return protocolError;
+  }
+  throw new Error('Unknown error');
+};
 
 export const configByChain = (chainIds: { [key: string]: number }, chainId: number): TConfigByChainOrUndefined => {
   const network = findKey(chainIds, id => id === chainId);

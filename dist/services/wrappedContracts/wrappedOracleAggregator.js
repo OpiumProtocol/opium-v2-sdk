@@ -37,6 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WrappedOracleAggregator = void 0;
+// types
+var misc_1 = require("../../types/misc");
+// utils
+var common_1 = require("../../common");
+var utils_1 = require("../../utils");
 var WrappedOracleAggregator = /** @class */ (function () {
     function WrappedOracleAggregator(_oracleAggregatorService) {
         this.oracleAggregatorService$ = _oracleAggregatorService;
@@ -44,14 +49,28 @@ var WrappedOracleAggregator = /** @class */ (function () {
     WrappedOracleAggregator.prototype.pushData = function (_timestamp, _data, _overrides) {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var signer;
+            var signer, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.oracleAggregatorService$.getProvider()];
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.oracleAggregatorService$.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         // eslint-disable-next-line no-underscore-dangle
                         return [2 /*return*/, this.oracleAggregatorService$.contract.connect(signer).__callback(_timestamp, _data, _overrides)];
+                    case 2:
+                        error_1 = _a.sent();
+                        if ((0, misc_1.isErrorReasonExplicit)(error_1)) {
+                            if ((0, utils_1.pickError)(error_1.reason)) {
+                                throw new common_1.SDKError((0, utils_1.pickError)(error_1.reason));
+                            }
+                        }
+                        if (error_1 instanceof Error) {
+                            throw new Error(error_1.message);
+                        }
+                        throw Error;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
@@ -60,7 +79,21 @@ var WrappedOracleAggregator = /** @class */ (function () {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.oracleAggregatorService$.contract.getData(_oracleId, _timestamp, _overrides)];
+                try {
+                    return [2 /*return*/, this.oracleAggregatorService$.contract.getData(_oracleId, _timestamp, _overrides)];
+                }
+                catch (error) {
+                    if ((0, misc_1.isErrorReasonExplicit)(error)) {
+                        if ((0, utils_1.pickError)(error.reason)) {
+                            throw new common_1.SDKError((0, utils_1.pickError)(error.reason));
+                        }
+                    }
+                    if (error instanceof Error) {
+                        throw new Error(error.message);
+                    }
+                    throw Error;
+                }
+                return [2 /*return*/];
             });
         });
     };
@@ -68,7 +101,21 @@ var WrappedOracleAggregator = /** @class */ (function () {
         if (_overrides === void 0) { _overrides = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.oracleAggregatorService$.contract.hasData(_oracleId, _timestamp, _overrides)];
+                try {
+                    return [2 /*return*/, this.oracleAggregatorService$.contract.hasData(_oracleId, _timestamp, _overrides)];
+                }
+                catch (error) {
+                    if ((0, misc_1.isErrorReasonExplicit)(error)) {
+                        if ((0, utils_1.pickError)(error.reason)) {
+                            throw new common_1.SDKError((0, utils_1.pickError)(error.reason));
+                        }
+                    }
+                    if (error instanceof Error) {
+                        throw new Error(error.message);
+                    }
+                    throw Error;
+                }
+                return [2 /*return*/];
             });
         });
     };
