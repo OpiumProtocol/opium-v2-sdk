@@ -1,2 +1,1 @@
-export * from "./sdk";
-export * from "./contractService";
+export * from './sdk';

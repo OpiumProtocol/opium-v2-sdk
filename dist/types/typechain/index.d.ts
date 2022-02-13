@@ -1,3 +1,5 @@
+export type { OnChainPositionsLens } from "./OnChainPositionsLens";
+export type { ILiveFeedOracleId } from "./ILiveFeedOracleId";
 export type { Core } from "./Core";
 export type { IDerivativeLogic } from "./IDerivativeLogic";
 export type { IERC20 } from "./IERC20";
@@ -5,6 +7,8 @@ export type { OracleAggregator } from "./OracleAggregator";
 export type { Registry } from "./Registry";
 export type { RegistryManager } from "./RegistryManager";
 export type { SyntheticAggregator } from "./SyntheticAggregator";
+export { OnChainPositionsLens__factory } from "./factories/OnChainPositionsLens__factory";
+export { ILiveFeedOracleId__factory } from "./factories/ILiveFeedOracleId__factory";
 export { Core__factory } from "./factories/Core__factory";
 export { IDerivativeLogic__factory } from "./factories/IDerivativeLogic__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";

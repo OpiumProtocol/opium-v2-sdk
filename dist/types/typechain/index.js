@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SyntheticAggregator__factory = exports.RegistryManager__factory = exports.Registry__factory = exports.OracleAggregator__factory = exports.IERC20__factory = exports.IDerivativeLogic__factory = exports.Core__factory = void 0;
+exports.SyntheticAggregator__factory = exports.RegistryManager__factory = exports.Registry__factory = exports.OracleAggregator__factory = exports.IERC20__factory = exports.IDerivativeLogic__factory = exports.Core__factory = exports.ILiveFeedOracleId__factory = exports.OnChainPositionsLens__factory = void 0;
+var OnChainPositionsLens__factory_1 = require("./factories/OnChainPositionsLens__factory");
+Object.defineProperty(exports, "OnChainPositionsLens__factory", { enumerable: true, get: function () { return OnChainPositionsLens__factory_1.OnChainPositionsLens__factory; } });
+var ILiveFeedOracleId__factory_1 = require("./factories/ILiveFeedOracleId__factory");
+Object.defineProperty(exports, "ILiveFeedOracleId__factory", { enumerable: true, get: function () { return ILiveFeedOracleId__factory_1.ILiveFeedOracleId__factory; } });
 var Core__factory_1 = require("./factories/Core__factory");
 Object.defineProperty(exports, "Core__factory", { enumerable: true, get: function () { return Core__factory_1.Core__factory; } });
 var IDerivativeLogic__factory_1 = require("./factories/IDerivativeLogic__factory");

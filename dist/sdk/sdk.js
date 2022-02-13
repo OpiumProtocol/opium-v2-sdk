@@ -35,37 +35,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpiumV2SDK = void 0;
-var providers_1 = require("@ethersproject/providers");
-var lodash_1 = require("lodash");
-var services_1 = require("../services");
-var _1 = require(".");
-var Registry_json_1 = __importDefault(require("../abi/Registry.json"));
-var Core_json_1 = __importDefault(require("../abi/Core.json"));
-var OracleAggregator_json_1 = __importDefault(require("../abi/OracleAggregator.json"));
-var SyntheticAggregator_json_1 = __importDefault(require("../abi/SyntheticAggregator.json"));
-var registry_1 = require("../services/registry");
-var constants_1 = require("../constants");
-var ethers_1 = require("ethers");
+// services
+var wrappedCore_1 = require("../services/wrappedContracts/wrappedCore");
+var wrappedOracleAggregator_1 = require("../services/wrappedContracts/wrappedOracleAggregator");
+var wrappedSyntheticAggregator_1 = require("../services/wrappedContracts/wrappedSyntheticAggregator");
+var wrappedRegistry_1 = require("../services/wrappedContracts/wrappedRegistry");
+var subgraphService_1 = require("../services/subgraphService/subgraphService");
+var simulatorService_1 = require("../services/simulatorService/simulatorService");
+var contractService_1 = require("../services/factoryService/contractService");
+var factoryService_1 = require("../services/factoryService");
+var abi_1 = require("../abi");
+// utils & constant
+var sdkContext_1 = require("../common/sdkContext");
 var OpiumV2SDK = /** @class */ (function () {
     function OpiumV2SDK(_config) {
-        if (_config.override) {
-            this._provider = new ethers_1.providers.Web3Provider(_config.override);
-        }
-        else {
-            this._provider = new providers_1.JsonRpcProvider(_config.rpcUrl);
-        }
-        var network = (0, lodash_1.findKey)(constants_1.chainIds, function (item) {
-            return item === _config.chainId;
-        });
-        if (!network) {
-            throw new Error("unsupported chainId");
-        }
-        this.registryInstance = new registry_1.RegistryContract(new _1.ContractService(constants_1.registryAddresses[network], Registry_json_1.default, this._provider));
+        this.sdkCtx = new sdkContext_1.SDKContext(_config);
+        this.registryInstance = new wrappedRegistry_1.WrappedRegistry(new contractService_1.ContractService(this.sdkCtx, this.sdkCtx.getNetworkConfig().registryProxyAddress, abi_1.RegistryABI));
+        this.subgraphService = new subgraphService_1.SubgraphService(this.sdkCtx);
+        this.simulatorService = new simulatorService_1.SimulatorService(this.sdkCtx);
+        this.derivativeLensFactory = new factoryService_1.DerivativeLensFactory(this.sdkCtx);
     }
     OpiumV2SDK.prototype.setup = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -75,10 +65,14 @@ var OpiumV2SDK = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.registryInstance.getProtocolAddresses()];
                     case 1:
                         protocolAddresses = _a.sent();
-                        this.coreInstance = new services_1.CoreContract(new _1.ContractService(protocolAddresses.core, Core_json_1.default, this._provider));
-                        this.oracleAggregatorInstance = new services_1.OracleAggregatorContract(new _1.ContractService(protocolAddresses.oracleAggregator, OracleAggregator_json_1.default, this._provider));
-                        this.syntheticAggregatorInstance = new services_1.SyntheticAggregatorContract(new _1.ContractService(protocolAddresses.syntheticAggregator, SyntheticAggregator_json_1.default, this._provider));
-                        return [2 /*return*/];
+                        this.coreInstance = new wrappedCore_1.WrappedCore(new contractService_1.ContractService(this.sdkCtx, protocolAddresses.core, abi_1.CoreABI));
+                        this.oracleAggregatorInstance = new wrappedOracleAggregator_1.WrappedOracleAggregator(new contractService_1.ContractService(this.sdkCtx, protocolAddresses.oracleAggregator, abi_1.OracleAggregatorABI));
+                        this.syntheticAggregatorInstance = new wrappedSyntheticAggregator_1.WrappedSyntheticAggregator(new contractService_1.ContractService(this.sdkCtx, protocolAddresses.syntheticAggregator, abi_1.SyntheticAggregatorABI));
+                        return [2 /*return*/, {
+                                coreInstance: this.coreInstance,
+                                oracleAggregatorInstance: this.oracleAggregatorInstance,
+                                syntheticAggregatorInstance: this.syntheticAggregatorInstance,
+                            }];
                 }
             });
         });

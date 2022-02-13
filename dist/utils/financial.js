@@ -13,16 +13,16 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.derivativeFactory = exports.getDerivativeHash = exports.mulDiv = void 0;
 var ethers_1 = require("ethers");
-var _1 = require(".");
+var math_1 = require("./math");
 var constants_1 = require("../constants");
 var mulDiv = function (amountX, amountY, scalingFactor) {
-    if (scalingFactor === void 0) { scalingFactor = ethers_1.utils.parseUnits("1", 18); }
-    var result = (0, _1.cast)(amountX).mul((0, _1.cast)(amountY));
+    if (scalingFactor === void 0) { scalingFactor = ethers_1.utils.parseUnits('1', 18); }
+    var result = (0, math_1.cast)(amountX).mul((0, math_1.cast)(amountY));
     return result.div(scalingFactor);
 };
 exports.mulDiv = mulDiv;
 var getDerivativeHash = function (derivative) {
-    return ethers_1.utils.solidityKeccak256(["uint256", "uint256", "uint256[]", "address", "address", "address"], [
+    return ethers_1.utils.solidityKeccak256(['uint256', 'uint256', 'uint256[]', 'address', 'address', 'address'], [
         derivative.margin,
         derivative.endTime,
         derivative.params,
@@ -34,7 +34,7 @@ var getDerivativeHash = function (derivative) {
 exports.getDerivativeHash = getDerivativeHash;
 var derivativeFactory = function (derivative) {
     var def = {
-        margin: (0, _1.toBN)("0"),
+        margin: (0, math_1.toBN)('0'),
         endTime: 0,
         params: [],
         oracleId: constants_1.zeroAddress,

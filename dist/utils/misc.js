@@ -1,7 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.structArray = exports.struct = void 0;
+exports.structArray = exports.struct = exports.configByChain = exports.pickError = void 0;
 var bignumber_1 = require("@ethersproject/bignumber/lib/bignumber");
+var lodash_1 = require("lodash");
+var constants_1 = require("../constants");
+var protocolErrors_1 = require("../constants/protocolErrors");
+var pickError = function (semanticError) {
+    var protocolError = (0, lodash_1.findKey)(protocolErrors_1.protocolErrors, function (error) { return error === semanticError; });
+    if (protocolError) {
+        return protocolError;
+    }
+    throw new Error('Unrecognized protocol error');
+};
+exports.pickError = pickError;
+var configByChain = function (chainIds, chainId) {
+    var network = (0, lodash_1.findKey)(chainIds, function (id) { return id === chainId; });
+    if (network) {
+        return constants_1.networksConfig[network];
+    }
+    return undefined;
+};
+exports.configByChain = configByChain;
 // TODO (mine): polish yearn code with generics to improve type-safety
 /**
  *
@@ -10,7 +29,7 @@ var bignumber_1 = require("@ethersproject/bignumber/lib/bignumber");
  */
 // convert tuples
 function struct(tuple) {
-    if (typeof tuple !== "object")
+    if (typeof tuple !== 'object')
         return tuple;
     var keys = Object.keys(tuple);
     // check if tuple is actually an array
@@ -22,7 +41,7 @@ function struct(tuple) {
     var copy = {};
     properties.forEach(function (property) {
         var value = tuple[property];
-        if (typeof value === "object" && !(0, bignumber_1.isBigNumberish)(value)) {
+        if (typeof value === 'object' && !(0, bignumber_1.isBigNumberish)(value)) {
             // recursive!
             copy[property] = struct(value);
         }

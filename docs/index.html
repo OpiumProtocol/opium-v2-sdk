@@ -1,1 +1,74 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>sdk-v2</title><meta name="description" content="Documentation for sdk-v2"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">sdk-v2</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>sdk-v2</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"></div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-property"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@opiumteam/opium-sdk-v2</title><meta name="description" content="Documentation for @opiumteam/opium-sdk-v2"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@opiumteam/opium-sdk-v2</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@opiumteam/opium-sdk-v2</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#opium-v2-sdk" id="opium-v2-sdk" style="color: inherit; text-decoration: none;">
+  <h1>Opium V2 SDK</h1>
+</a>
+<p>The <code>OpiumV2SDK</code> class is the entry-point to all the core functionality of the SDK.</p>
+<p>The SDK is divided in 4 main services:</p>
+<ul>
+<li>Core protocol contract wrappers</li>
+<li>Subgraph service</li>
+<li>Simulator service</li>
+<li>DerivativeLensFactory</li>
+</ul>
+
+<a href="#core-protocol-wrappers" id="core-protocol-wrappers" style="color: inherit; text-decoration: none;">
+  <h3>Core protocol wrappers</h3>
+</a>
+<p>It includes class wrappers to facilitate the interaction with the Opium V2 core contract, respectively <strong>Registry</strong>, <strong>Core</strong>, <strong>SyntheticAggregator</strong>, <strong>OracleAggregator</strong>. The address of the contracts will be automatically initialized according to the <code>chainId</code> with which the SDK class had been initialized.</p>
+
+<a href="#subgraph-wrappers" id="subgraph-wrappers" style="color: inherit; text-decoration: none;">
+  <h3>Subgraph wrappers</h3>
+</a>
+<p>It allows to easily query the Opium V2 subgraph according to the <code>chainId</code> with which the SDK class had been initialized.</p>
+
+<a href="#simulator-wrappers" id="simulator-wrappers" style="color: inherit; text-decoration: none;">
+  <h3>Simulator wrappers</h3>
+</a>
+<p>It allows to perform some useful queries about the protocol parameters - i.e.: calculate the derivative hash for a given derivative, calculate the LONG/SHORT positions addresses for a given derivative etc. - either locally via <code>ethers.js</code> or by calling a helper contract.</p>
+
+<a href="#derivativelensfactory" id="derivativelensfactory" style="color: inherit; text-decoration: none;">
+  <h3>DerivativeLensFactory</h3>
+</a>
+<p>It allows to query the state of user-defined contracts running on the Opium V2 protocol - i.e: oracleIds and syntheticIds.</p>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h2>Install</h2>
+</a>
+<pre><code class="language-shell"><span class="hl-0">yarn add @opiumteam/opium-sdk-v2</span>
+</code></pre>
+
+<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+  <h2>Example</h2>
+</a>
+<p>You can easily initialize the <code>OpiumV2SDK</code> by passing a valid rpcUrl and its associated chainId, as in the following code snippet:</p>
+<pre><code class="language-ts"><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-2">main</span><span class="hl-0"> = </span><span class="hl-1">async</span><span class="hl-0"> () </span><span class="hl-1">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-1">const</span><span class="hl-0"> </span><span class="hl-3">sdk</span><span class="hl-0"> = </span><span class="hl-1">new</span><span class="hl-0"> </span><span class="hl-2">OpiumV2SDK</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-4">rpcUrl:</span><span class="hl-0"> </span><span class="hl-5">&#39;https://rinkeby.arbitrum.io/rpc&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-4">chainId:</span><span class="hl-0"> </span><span class="hl-6">421611</span><span class="hl-0">,</span><br/><span class="hl-0">  });</span><br/><span class="hl-0">  </span><span class="hl-1">const</span><span class="hl-0"> { </span><span class="hl-3">registryInstance</span><span class="hl-0">, </span><span class="hl-3">subgraphService</span><span class="hl-0">, </span><span class="hl-3">simulatorService</span><span class="hl-0">, </span><span class="hl-3">derivativeLensFactory</span><span class="hl-0"> } = </span><span class="hl-4">sdk</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-1">const</span><span class="hl-0"> { </span><span class="hl-3">coreInstance</span><span class="hl-0">, </span><span class="hl-3">oracleAggregatorInstance</span><span class="hl-0">, </span><span class="hl-3">syntheticAggregatorInstance</span><span class="hl-0"> } = </span><span class="hl-7">await</span><span class="hl-0"> </span><span class="hl-4">sdk</span><span class="hl-0">.</span><span class="hl-2">setup</span><span class="hl-0">();</span><br/><span class="hl-0">};</span>
+</code></pre>
+<ol>
+<li>Note that the initialization is split in two phases:</li>
+</ol>
+<ul>
+<li>Upon initialization of the <code>OpiumV2SDK</code>, the <strong>registryInstance</strong>, <strong>subgraphService</strong>, <strong>simulatorService</strong>, <strong>derivativeLensFactory</strong> will be instantiated.</li>
+<li>In order to initialize the Opium V2&#39;s wrapped contracts (<strong>Registry</strong>, <strong>Core</strong>, <strong>SyntheticAggregator</strong>, <strong>OracleAggregator</strong>), the user has to manually call the <code>setup</code> function: this is because the addresses used for the initialization of the core wrapped contracts are fetched directly from the Opium V2 Registry contract as to avoid forcing the users to pass them manually.</li>
+</ul>
+<ol start="2">
+<li>Note that to allow the SDK to run seamlessly in a web3.js environment, it is possible to override the <code>JsonRpcProvider</code> provider by passing a web3.js provider in the <code>override</code> field. Read more <a href="https://docs.ethers.io/v5/api/providers/other/#Web3Provider">here</a>.</li>
+</ol>
+<pre><code class="language-ts"><span class="hl-7">export</span><span class="hl-0"> </span><span class="hl-1">interface</span><span class="hl-0"> </span><span class="hl-8">IOpiumV2SDKConfig</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">rpcUrl</span><span class="hl-0">: </span><span class="hl-8">string</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-4">chainId</span><span class="hl-0">: </span><span class="hl-8">number</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-4">override</span><span class="hl-0">?: </span><span class="hl-8">providers</span><span class="hl-0">.</span><span class="hl-8">ExternalProvider</span><span class="hl-0">;</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#maintainers" id="maintainers" style="color: inherit; text-decoration: none;">
+  <h2>Maintainers</h2>
+</a>
+<ul>
+<li><a href="https://github.com/riccardobiosas">RiccardoBiosas</a></li>
+<li><a href="https://github.com/Alirun">Alirun</a></li>
+</ul>
+
+<a href="#contribute--good-first-issues" id="contribute--good-first-issues" style="color: inherit; text-decoration: none;">
+  <h2>Contribute / good first issues:</h2>
+</a>
+<ul>
+<li><input disabled="" type="checkbox"> Allow the <code>SimulatorService</code> class to calculate the LONG/SHORT positions addresses locally by using the <code>ethers.utils.getCreate2Address</code></li>
+<li><input disabled="" type="checkbox"> Increase test coverage</li>
+</ul>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-property"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
