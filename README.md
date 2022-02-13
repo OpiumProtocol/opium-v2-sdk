@@ -13,11 +13,11 @@ The SDK is divided in 4 main services:
 
 It includes class wrappers to facilitate the interaction with the Opium V2 core contract, respectively **Registry**, **Core**, **SyntheticAggregator**, **OracleAggregator**. The address of the contracts will be automatically initialized according to the `chainId` with which the SDK class had been initialized.
 
-### Subgraph wrappers
+### Subgraph service
 
 It allows to easily query the Opium V2 subgraph according to the `chainId` with which the SDK class had been initialized.
 
-### Simulator wrappers
+### Simulator service
 
 It allows to perform some useful queries about the protocol parameters - i.e.: calculate the derivative hash for a given derivative, calculate the LONG/SHORT positions addresses for a given derivative etc. - either locally via `ethers.js` or by calling a helper contract.
 
