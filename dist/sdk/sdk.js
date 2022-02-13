@@ -46,8 +46,8 @@ var subgraphService_1 = require("../services/subgraphService/subgraphService");
 var simulatorService_1 = require("../services/simulatorService/simulatorService");
 var contractService_1 = require("../services/factoryService/contractService");
 var factoryService_1 = require("../services/factoryService");
-// types
 var abi_1 = require("../abi");
+// utils & constant
 var sdkContext_1 = require("../common/sdkContext");
 var OpiumV2SDK = /** @class */ (function () {
     function OpiumV2SDK(_config) {

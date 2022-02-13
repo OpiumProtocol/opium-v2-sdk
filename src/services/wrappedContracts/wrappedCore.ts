@@ -1,6 +1,6 @@
 // theirs
 import { omit } from 'lodash';
-import { BigNumberish, Contract, CallOverrides, ContractReceipt } from 'ethers';
+import { BigNumberish, Contract, CallOverrides, ContractReceipt, BigNumber } from 'ethers';
 // services
 import { ContractService } from '../factoryService/contractService';
 // types
@@ -362,7 +362,7 @@ export class WrappedCore {
     }
   }
 
-  public async getReservesVaultBalance(_reseveRecipient: string, _tokenAddress: string): Promise<BigNumberish> {
+  public async getReservesVaultBalance(_reseveRecipient: string, _tokenAddress: string): Promise<BigNumber> {
     try {
       return this.coreService$.contract.getReservesVaultBalance(_reseveRecipient, _tokenAddress);
     } catch (error) {
@@ -469,7 +469,7 @@ export class WrappedCore {
     }
   }
 
-  private async computeDerivativeMargin$(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumberish> {
+  private async computeDerivativeMargin$(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumber> {
     try {
       const syntheticId = <IDerivativeLogic>(
         new Contract(_derivative.syntheticId, IDerivativeLogicAbi, this.coreService$.sdkCtx.getProvider())

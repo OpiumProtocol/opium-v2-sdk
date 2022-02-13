@@ -1,7 +1,7 @@
 import { providers } from 'ethers';
-import { IOpiumV2SDKConfig, TConfigByChain } from '../types';
-import { configByChain } from '../utils';
-import { SDKError } from '.';
+import { IOpiumV2SDKConfig, TConfigByChain } from '../types/misc';
+import { configByChain } from '../utils/misc';
+import { SDKError } from './sdkError';
 import { chainIds, sdkErrors } from '../constants';
 
 export class SDKContext {

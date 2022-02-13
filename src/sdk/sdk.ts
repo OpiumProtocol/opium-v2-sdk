@@ -8,17 +8,24 @@ import { SimulatorService } from '../services/simulatorService/simulatorService'
 import { ContractService } from '../services/factoryService/contractService';
 import { DerivativeLensFactory } from '../services/factoryService';
 // types
+import { IOpiumV2SDKConfig } from '../types/misc';
 import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } from '../abi';
 import { Core, OracleAggregator, Registry } from '../types/typechain';
 import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
 // utils & constant
-import { IOpiumV2SDKConfig } from '../types/misc';
 import { SDKContext } from '../common/sdkContext';
 
 export class OpiumV2SDK {
+  /** ***********
+   * SDK CONTEXT
+   * it exposes getters to fetch web3 config with which the SDK has been initialized
+   ************** */
   public readonly sdkCtx: SDKContext;
 
-  // smart contracts' services
+  /** ***********
+   * SMART CONTRACT SERVICE INSTANCES
+   * it exposes type-safe class wrappers around the Opium V2 core contracts
+   ************** */
   public registryInstance: WrappedRegistry;
 
   public coreInstance: WrappedCore | undefined;
@@ -27,12 +34,22 @@ export class OpiumV2SDK {
 
   public syntheticAggregatorInstance: WrappedSyntheticAggregator | undefined;
 
-  // subgraph service
+  /** ***********
+   * SUBGRAPH SERVICE INSTANCE
+   * it exposes functions to query the Opium V2 subgraph
+   ************** */
   public subgraphService: SubgraphService;
 
-  // simulator service
+  /** ***********
+   * SIMULATOR SERVICE INSTANCE
+   * it exposes functions to obtain information about the state of the Opium V2 protocol either by sending JSON-RPC calls to an Ethereum network or by performing some local computation
+   ************** */
   public simulatorService: SimulatorService;
 
+  /** ***********
+   * DERIVATIVELENSFACTORY SERVICE INSTANCE
+   * it exposes functions to obtain information about Opium V2 tickers by querying SyntheticID contracts or OracleID contracts
+   ************** */
   public derivativeLensFactory: DerivativeLensFactory;
 
   constructor(_config: IOpiumV2SDKConfig) {

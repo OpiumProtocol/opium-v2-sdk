@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SDKContext = void 0;
 var ethers_1 = require("ethers");
-var utils_1 = require("../utils");
-var _1 = require(".");
+var misc_1 = require("../utils/misc");
+var sdkError_1 = require("./sdkError");
 var constants_1 = require("../constants");
 var SDKContext = /** @class */ (function () {
     function SDKContext(_config) {
@@ -14,9 +14,9 @@ var SDKContext = /** @class */ (function () {
         else {
             this.provider$ = new ethers_1.providers.JsonRpcProvider(_config.rpcUrl);
         }
-        var networkConfig = (0, utils_1.configByChain)(constants_1.chainIds, _config.chainId);
+        var networkConfig = (0, misc_1.configByChain)(constants_1.chainIds, _config.chainId);
         if (!networkConfig) {
-            throw new _1.SDKError(constants_1.sdkErrors.UNSUPPORTED_CHAIN);
+            throw new sdkError_1.SDKError(constants_1.sdkErrors.UNSUPPORTED_CHAIN);
         }
         else {
             this.networkConfig$ = networkConfig;

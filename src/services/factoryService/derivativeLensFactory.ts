@@ -19,7 +19,7 @@ export class DerivativeLensFactory {
     this.sdkCtx$ = _sdkCtx;
   }
 
-  public async getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumberish> {
+  public async getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumber> {
     try {
       const oracleId = new ContractService<ILiveFeedOracleId>(this.sdkCtx$, _oracleIdAddress, ILiveFeedOracleIdABI);
       return oracleId.contract.getResult();

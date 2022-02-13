@@ -1,5 +1,5 @@
 import { providers } from 'ethers';
-import { IOpiumV2SDKConfig, TConfigByChain } from '../types';
+import { IOpiumV2SDKConfig, TConfigByChain } from '../types/misc';
 export declare class SDKContext {
     private readonly provider$;
     private readonly chainId$;

@@ -1,4 +1,4 @@
-import { BigNumberish, CallOverrides, ContractReceipt } from 'ethers';
+import { BigNumberish, CallOverrides, ContractReceipt, BigNumber } from 'ethers';
 import { ContractService } from '../factoryService/contractService';
 import { TProtocolAddresses, TProtocolParameters } from '../../types/contracts';
 import { TDerivative, TAddress } from '../../types/index';
@@ -21,10 +21,10 @@ export declare class WrappedCore {
     isDerivativeCancelledByDerivativeHash(_derivativeHash: string): Promise<boolean>;
     getDerivativePayoutsByDerivative(_derivative: TDerivative): Promise<[BigNumberish, BigNumberish]>;
     getDerivativePayoutsByDerivativeHash(_derivativeHash: string): Promise<[BigNumberish, BigNumberish]>;
-    getReservesVaultBalance(_reseveRecipient: string, _tokenAddress: string): Promise<BigNumberish>;
+    getReservesVaultBalance(_reseveRecipient: string, _tokenAddress: string): Promise<BigNumber>;
     getProtocolAddresses(): Promise<TProtocolAddresses>;
     getProtocolParametersArgs(): Promise<TProtocolParameters>;
-    computeDerivativeMargin(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumberish>;
+    computeDerivativeMargin(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumber>;
     private getDerivativePayouts$;
     private isDerivativeCancelled$;
     private computeDerivativeMargin$;

@@ -2,9 +2,12 @@ import { providers } from 'ethers';
 
 export const isProvider = (arg: providers.JsonRpcProvider | undefined): arg is providers.JsonRpcProvider => true;
 
+// eslint-disable-next-line no-shadow
 export enum ENetworks {
   // GANACHE = "GANACHE",
+  // eslint-disable-next-line no-unused-vars
   GOERLI = 'GOERLI',
+  // eslint-disable-next-line no-unused-vars
   ARBITRUM_TESTNET = 'ARBITRUM_TESTNET',
 }
 
