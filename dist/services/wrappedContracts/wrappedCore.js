@@ -59,13 +59,13 @@ var WrappedCore = /** @class */ (function () {
             var signer, tokenSpenderAddress, token, requiredMargin, tx;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.coreService$.getProvider()];
+                    case 0: return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract.getProtocolAddresses()];
                     case 2:
                         tokenSpenderAddress = _a.sent();
-                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.getProvider());
+                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.sdkCtx.getProvider());
                         return [4 /*yield*/, this.computeDerivativeMargin$(_derivative, _amount)];
                     case 3:
                         requiredMargin = _a.sent();
@@ -90,13 +90,13 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 6, , 7]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract.getProtocolAddresses()];
                     case 2:
                         tokenSpenderAddress = _a.sent();
-                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.getProvider());
+                        token = new ethers_1.Contract(_derivative.token, abi_1.IERC20Abi, this.coreService$.sdkCtx.getProvider());
                         return [4 /*yield*/, this.computeDerivativeMargin$(_derivative, _amount)];
                     case 3:
                         requiredMargin = _a.sent();
@@ -133,7 +133,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -166,7 +166,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -198,7 +198,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -230,7 +230,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -290,7 +290,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -322,7 +322,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -354,7 +354,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -386,7 +386,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.coreService$.getProvider()];
+                        return [4 /*yield*/, this.coreService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         return [4 /*yield*/, this.coreService$.contract
@@ -649,7 +649,7 @@ var WrappedCore = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 2, , 3]);
-                        syntheticId = (new ethers_1.Contract(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.coreService$.getProvider()));
+                        syntheticId = (new ethers_1.Contract(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.coreService$.sdkCtx.getProvider()));
                         return [4 /*yield*/, syntheticId.getMargin(_derivative)];
                     case 1:
                         _a = _b.sent(), buyerMargin = _a[0], sellerMargin = _a[1];

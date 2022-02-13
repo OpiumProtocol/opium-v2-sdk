@@ -6,22 +6,17 @@ var lodash_1 = require("lodash");
 var constants_1 = require("../constants");
 var protocolErrors_1 = require("../constants/protocolErrors");
 var pickError = function (semanticError) {
-    console.log('semanticError::: ', semanticError);
     var protocolError = (0, lodash_1.findKey)(protocolErrors_1.protocolErrors, function (error) { return error === semanticError; });
-    console.log('protocolError::: ', protocolError);
     if (protocolError) {
         return protocolError;
     }
-    throw new Error('Unknown error');
+    throw new Error('Unrecognized protocol error');
 };
 exports.pickError = pickError;
 var configByChain = function (chainIds, chainId) {
     var network = (0, lodash_1.findKey)(chainIds, function (id) { return id === chainId; });
     if (network) {
-        return {
-            registryAddress: constants_1.registryAddresses[network],
-            subgraphEndpoint: constants_1.subgraphEndpoints[network],
-        };
+        return constants_1.networksConfig[network];
     }
     return undefined;
 };

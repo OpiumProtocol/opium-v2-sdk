@@ -1,26 +1,23 @@
-import { providers, Contract, ContractInterface } from 'ethers';
+import { Contract, ContractInterface } from 'ethers';
+import { SDKContext } from '../../common/sdkContext';
 
 export class ContractService<T extends Contract> {
+  public readonly sdkCtx: SDKContext;
+
   private readonly address$: string;
 
   private readonly abi$: ContractInterface;
 
-  private readonly provider$: providers.JsonRpcProvider;
-
   public readonly contract: T;
 
-  constructor(_address: string, _abi: ContractInterface, _provider: providers.JsonRpcProvider) {
+  constructor(_sdkCtx: SDKContext, _address: string, _abi: ContractInterface) {
+    this.sdkCtx = _sdkCtx;
     this.address$ = _address;
     this.abi$ = _abi;
-    this.provider$ = _provider;
-    this.contract = <T>new Contract(this.address$, this.abi$, this.provider$);
+    this.contract = <T>new Contract(this.address$, this.abi$, this.sdkCtx.getProvider());
   }
 
   public getAddress(): string {
     return this.address$;
-  }
-
-  public getProvider(): providers.JsonRpcProvider {
-    return this.provider$;
   }
 }

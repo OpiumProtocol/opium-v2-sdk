@@ -56,7 +56,7 @@ var WrappedSyntheticAggregator = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
+                        return [4 /*yield*/, this.syntheticAggregatorService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);
@@ -87,7 +87,7 @@ var WrappedSyntheticAggregator = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, this.syntheticAggregatorService$.getProvider()];
+                        return [4 /*yield*/, this.syntheticAggregatorService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_b.sent()).getSigner();
                         derivativeHash = (0, financial_1.getDerivativeHash)(_derivative);

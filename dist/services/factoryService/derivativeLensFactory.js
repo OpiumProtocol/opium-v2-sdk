@@ -42,19 +42,18 @@ var contractService_1 = require("./contractService");
 // types
 var misc_1 = require("../../types/misc");
 var abi_1 = require("../../abi");
-// utils
 var common_1 = require("../../common");
 var utils_1 = require("../../utils");
 var DerivativeLensFactory = /** @class */ (function () {
-    function DerivativeLensFactory(_provider) {
-        this.provider$ = _provider;
+    function DerivativeLensFactory(_sdkCtx) {
+        this.sdkCtx$ = _sdkCtx;
     }
     DerivativeLensFactory.prototype.getOracleIdResult = function (_oracleIdAddress) {
         return __awaiter(this, void 0, void 0, function () {
             var oracleId;
             return __generator(this, function (_a) {
                 try {
-                    oracleId = new contractService_1.ContractService(_oracleIdAddress, abi_1.ILiveFeedOracleIdABI, this.provider$);
+                    oracleId = new contractService_1.ContractService(this.sdkCtx$, _oracleIdAddress, abi_1.ILiveFeedOracleIdABI);
                     return [2 /*return*/, oracleId.contract.getResult()];
                 }
                 catch (error) {
@@ -77,7 +76,7 @@ var DerivativeLensFactory = /** @class */ (function () {
             var syntheticId;
             return __generator(this, function (_a) {
                 try {
-                    syntheticId = new contractService_1.ContractService(_derivative.syntheticId, abi_1.IDerivativeLogicAbi, this.provider$);
+                    syntheticId = new contractService_1.ContractService(this.sdkCtx$, _derivative.syntheticId, abi_1.IDerivativeLogicAbi);
                     return [2 /*return*/, syntheticId.contract.getExecutionPayout(_derivative, _strikeResult)];
                 }
                 catch (error) {

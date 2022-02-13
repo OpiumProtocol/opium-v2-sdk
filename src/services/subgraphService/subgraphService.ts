@@ -1,15 +1,16 @@
 // theirs
 import axios from 'axios';
+import { SDKContext } from '../../common/sdkContext';
 // types
 import { TBuyer, TPosition, TSeller } from '../../types/subgraph';
 // utils
 import { buyersQuery, positionsQuery, sellersQuery } from './queries';
 
 export class SubgraphService {
-  private readonly subgraphEndpoint$: string;
+  private readonly sdkCtx$: SDKContext;
 
-  constructor(_subgraphEndpoint: string) {
-    this.subgraphEndpoint$ = _subgraphEndpoint;
+  constructor(_sdkCtx: SDKContext) {
+    this.sdkCtx$ = _sdkCtx;
   }
 
   public async queryPositions(): Promise<TPosition[]> {
@@ -22,7 +23,7 @@ export class SubgraphService {
     };
 
     const response = await axios({
-      url: this.subgraphEndpoint$,
+      url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
       method: 'post',
       headers,
       data: graphqlQuery,
@@ -41,7 +42,7 @@ export class SubgraphService {
     };
 
     const response = await axios({
-      url: this.subgraphEndpoint$,
+      url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
       method: 'post',
       headers,
       data: graphqlQuery,
@@ -60,7 +61,7 @@ export class SubgraphService {
     };
 
     const response = await axios({
-      url: this.subgraphEndpoint$,
+      url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
       method: 'post',
       headers,
       data: graphqlQuery,

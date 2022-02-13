@@ -24,7 +24,7 @@ export class WrappedSyntheticAggregator {
     _overrides: CallOverrides = {},
   ): Promise<ContractTransaction> {
     try {
-      const signer = (await this.syntheticAggregatorService$.getProvider()).getSigner();
+      const signer = (await this.syntheticAggregatorService$.sdkCtx.getProvider()).getSigner();
       const derivativeHash = getDerivativeHash(_derivative);
       return this.syntheticAggregatorService$.contract
         .connect(signer)
@@ -47,7 +47,7 @@ export class WrappedSyntheticAggregator {
     _overrides: CallOverrides = {},
   ): Promise<ContractTransaction> {
     try {
-      const signer = (await this.syntheticAggregatorService$.getProvider()).getSigner();
+      const signer = (await this.syntheticAggregatorService$.sdkCtx.getProvider()).getSigner();
       const derivativeHash = getDerivativeHash(_derivative);
       return struct(
         await this.syntheticAggregatorService$.contract

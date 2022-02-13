@@ -31,9 +31,9 @@ export class WrappedCore {
     _positionsOwners: [TAddress, TAddress],
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
-    const signer = (await this.coreService$.getProvider()).getSigner();
+    const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
     const tokenSpenderAddress = await this.coreService$.contract.getProtocolAddresses();
-    const token = <IERC20>new Contract(_derivative.token, IERC20Abi, this.coreService$.getProvider());
+    const token = <IERC20>new Contract(_derivative.token, IERC20Abi, this.coreService$.sdkCtx.getProvider());
 
     const requiredMargin = await this.computeDerivativeMargin$(_derivative, _amount);
     await token.connect(signer).approve(tokenSpenderAddress.tokenSpender, requiredMargin);
@@ -50,9 +50,9 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tokenSpenderAddress = await this.coreService$.contract.getProtocolAddresses();
-      const token = <IERC20>new Contract(_derivative.token, IERC20Abi, this.coreService$.getProvider());
+      const token = <IERC20>new Contract(_derivative.token, IERC20Abi, this.coreService$.sdkCtx.getProvider());
       const requiredMargin = await this.computeDerivativeMargin$(_derivative, _amount);
       await token.connect(signer).approve(tokenSpenderAddress.tokenSpender, requiredMargin);
       const tx = await this.coreService$.contract
@@ -79,7 +79,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       // TODO: improve (it does not include the ERC20 approval)
       const tx = await this.coreService$.contract
         .connect(signer)
@@ -104,7 +104,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['redeem(address[2],uint256)'](_positionsAddresses, _amount, _overrides);
@@ -128,7 +128,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['redeem(address[2][],uint256[])'](_positionsAddresses, _amounts, _overrides);
@@ -152,7 +152,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['execute(address,uint256)'](_positionAddress, _amount, _overrides);
@@ -203,7 +203,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['execute(address[],uint256[])'](_positionsAddresses, _amounts, _overrides);
@@ -228,7 +228,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['execute(address,address[],uint256[])'](_positionOwner, _positionsAddresses, _amounts, _overrides);
@@ -252,7 +252,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['cancel(address,uint256)'](_positionAddress, _amount, _overrides);
@@ -276,7 +276,7 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
-      const signer = (await this.coreService$.getProvider()).getSigner();
+      const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
       const tx = await this.coreService$.contract
         .connect(signer)
         ['cancel(address[],uint256[])'](_positionsAddresses, _amounts, _overrides);
@@ -472,7 +472,7 @@ export class WrappedCore {
   private async computeDerivativeMargin$(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumberish> {
     try {
       const syntheticId = <IDerivativeLogic>(
-        new Contract(_derivative.syntheticId, IDerivativeLogicAbi, this.coreService$.getProvider())
+        new Contract(_derivative.syntheticId, IDerivativeLogicAbi, this.coreService$.sdkCtx.getProvider())
       );
       const [buyerMargin, sellerMargin] = await syntheticId.getMargin(_derivative);
       return mulDiv(buyerMargin.add(sellerMargin), _amount);

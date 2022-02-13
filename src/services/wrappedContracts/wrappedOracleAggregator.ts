@@ -22,7 +22,7 @@ export class WrappedOracleAggregator {
     _overrides: CallOverrides = {},
   ): Promise<ContractTransaction> {
     try {
-      const signer = (await this.oracleAggregatorService$.getProvider()).getSigner();
+      const signer = (await this.oracleAggregatorService$.sdkCtx.getProvider()).getSigner();
       // eslint-disable-next-line no-underscore-dangle
       return this.oracleAggregatorService$.contract.connect(signer).__callback(_timestamp, _data, _overrides);
     } catch (error) {

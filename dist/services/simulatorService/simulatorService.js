@@ -43,8 +43,8 @@ var abi_1 = require("../../abi");
 // utils
 var utils_1 = require("../../utils");
 var SimulatorService = /** @class */ (function () {
-    function SimulatorService(_provider) {
-        this.provider$ = _provider;
+    function SimulatorService(_sdkCtx) {
+        this.sdkCtx$ = _sdkCtx;
     }
     SimulatorService.computeDerivativeHash = function (_derivative) {
         return (0, utils_1.getDerivativeHash)(_derivative);
@@ -56,7 +56,7 @@ var SimulatorService = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        onChainPositionsLens = new contractService_1.ContractService('0x4b214b8aafbdeb170b550bb2dfed41aadd9acf74', abi_1.OnChainPositionsLensABI, this.provider$);
+                        onChainPositionsLens = new contractService_1.ContractService(this.sdkCtx$, this.sdkCtx$.getNetworkConfig().onChainPositionLensAddress, abi_1.OnChainPositionsLensABI);
                         return [4 /*yield*/, onChainPositionsLens.contract.predictPositionsAddressesByDerivative(_derivative)];
                     case 1:
                         _a = _b.sent(), longPositionAddress = _a[0], shortPositionAddress = _a[1];
@@ -74,7 +74,7 @@ var SimulatorService = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        onChainPositionsLens = new contractService_1.ContractService('0x4b214b8aafbdeb170b550bb2dfed41aadd9acf74', abi_1.OnChainPositionsLensABI, this.provider$);
+                        onChainPositionsLens = new contractService_1.ContractService(this.sdkCtx$, this.sdkCtx$.getNetworkConfig().onChainPositionLensAddress, abi_1.OnChainPositionsLensABI);
                         return [4 /*yield*/, onChainPositionsLens.contract.predictPositionsAddressesByDerivativeHash(_derivativeHash)];
                     case 1:
                         _a = _b.sent(), longPositionAddress = _a[0], shortPositionAddress = _a[1];

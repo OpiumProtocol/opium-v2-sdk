@@ -1,5 +1,3 @@
-// theirs
-import { providers } from 'ethers';
 // services
 import { WrappedCore } from '../services/wrappedContracts/wrappedCore';
 import { WrappedOracleAggregator } from '../services/wrappedContracts/wrappedOracleAggregator';
@@ -14,19 +12,11 @@ import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } fro
 import { Core, OracleAggregator, Registry } from '../types/typechain';
 import { SyntheticAggregator } from '../types/typechain/SyntheticAggregator';
 // utils & constant
-import { SDKError } from '../common';
-import { chainIds, sdkErrors } from '../constants';
-import { configByChain } from '../utils';
-
-export interface IOpiumV2SDKConfig {
-  // use a known network or provide an entirely custom config
-  rpcUrl: string;
-  chainId: typeof chainIds[keyof typeof chainIds];
-  override?: providers.ExternalProvider;
-}
+import { IOpiumV2SDKConfig } from '../types/misc';
+import { SDKContext } from '../common/sdkContext';
 
 export class OpiumV2SDK {
-  public readonly provider$: providers.JsonRpcProvider;
+  public readonly sdkCtx: SDKContext;
 
   // smart contracts' services
   public registryInstance: WrappedRegistry;
@@ -46,42 +36,43 @@ export class OpiumV2SDK {
   public derivativeLensFactory: DerivativeLensFactory;
 
   constructor(_config: IOpiumV2SDKConfig) {
-    if (_config.override) {
-      this.provider$ = new providers.Web3Provider(_config.override);
-    } else {
-      this.provider$ = new providers.JsonRpcProvider(_config.rpcUrl);
-    }
-    const networkConfig = configByChain(chainIds, _config.chainId);
-    if (!networkConfig) {
-      throw new SDKError(sdkErrors.UNSUPPORTED_CHAIN);
-    }
+    this.sdkCtx = new SDKContext(_config);
 
     this.registryInstance = new WrappedRegistry(
-      new ContractService<Registry>(networkConfig.registryAddress, RegistryABI, this.provider$),
+      new ContractService<Registry>(this.sdkCtx, this.sdkCtx.getNetworkConfig().registryProxyAddress, RegistryABI),
     );
 
-    this.subgraphService = new SubgraphService(networkConfig.subgraphEndpoint);
+    this.subgraphService = new SubgraphService(this.sdkCtx);
 
-    this.simulatorService = new SimulatorService(this.provider$);
+    this.simulatorService = new SimulatorService(this.sdkCtx);
 
-    this.derivativeLensFactory = new DerivativeLensFactory(this.provider$);
+    this.derivativeLensFactory = new DerivativeLensFactory(this.sdkCtx);
   }
 
-  public async setup(): Promise<void> {
+  public async setup(): Promise<{
+    coreInstance: WrappedCore;
+    oracleAggregatorInstance: WrappedOracleAggregator;
+    syntheticAggregatorInstance: WrappedSyntheticAggregator;
+  }> {
     const protocolAddresses = await this.registryInstance.getProtocolAddresses();
 
-    this.coreInstance = new WrappedCore(new ContractService<Core>(protocolAddresses.core, CoreABI, this.provider$));
+    this.coreInstance = new WrappedCore(new ContractService<Core>(this.sdkCtx, protocolAddresses.core, CoreABI));
 
     this.oracleAggregatorInstance = new WrappedOracleAggregator(
-      new ContractService<OracleAggregator>(protocolAddresses.oracleAggregator, OracleAggregatorABI, this.provider$),
+      new ContractService<OracleAggregator>(this.sdkCtx, protocolAddresses.oracleAggregator, OracleAggregatorABI),
     );
 
     this.syntheticAggregatorInstance = new WrappedSyntheticAggregator(
       new ContractService<SyntheticAggregator>(
+        this.sdkCtx,
         protocolAddresses.syntheticAggregator,
         SyntheticAggregatorABI,
-        this.provider$,
       ),
     );
+    return {
+      coreInstance: this.coreInstance,
+      oracleAggregatorInstance: this.oracleAggregatorInstance,
+      syntheticAggregatorInstance: this.syntheticAggregatorInstance,
+    };
   }
 }

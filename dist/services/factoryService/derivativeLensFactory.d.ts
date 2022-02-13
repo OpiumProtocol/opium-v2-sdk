@@ -1,8 +1,9 @@
-import { BigNumberish, BigNumber, providers } from 'ethers';
+import { BigNumberish, BigNumber } from 'ethers';
 import { TAddress, TDerivative } from '../../types';
+import { SDKContext } from '../../common/sdkContext';
 export declare class DerivativeLensFactory {
-    private readonly provider$;
-    constructor(_provider: providers.JsonRpcProvider);
+    private readonly sdkCtx$;
+    constructor(_sdkCtx: SDKContext);
     getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumberish>;
     getSyntheticIdExecutionPayout(_derivative: TDerivative, _strikeResult: BigNumberish): Promise<[BigNumber, BigNumber]>;
 }

@@ -1,6 +1,6 @@
-import { JsonRpcProvider } from '@ethersproject/providers';
+import { providers } from 'ethers';
 
-export const isProvider = (arg: JsonRpcProvider | undefined): arg is JsonRpcProvider => true;
+export const isProvider = (arg: providers.JsonRpcProvider | undefined): arg is providers.JsonRpcProvider => true;
 
 export enum ENetworks {
   // GANACHE = "GANACHE",
@@ -8,12 +8,20 @@ export enum ENetworks {
   ARBITRUM_TESTNET = 'ARBITRUM_TESTNET',
 }
 
+export interface IOpiumV2SDKConfig {
+  // use a known network or provide an entirely custom config
+  rpcUrl: string;
+  chainId: number;
+  override?: providers.ExternalProvider;
+}
+
 export type valueof<T> = T[keyof T];
 
 export type TAddress = string;
 
 export type TConfigByChain = {
-  registryAddress: TAddress;
+  registryProxyAddress: TAddress;
+  onChainPositionLensAddress: TAddress;
   subgraphEndpoint: string;
 };
 

@@ -1,5 +1,3 @@
-// theirs
-import { providers } from 'ethers';
 // services
 import { ContractService } from '../factoryService/contractService';
 // types
@@ -8,12 +6,13 @@ import { OnChainPositionsLens } from '../../types/typechain/OnChainPositionsLens
 import { OnChainPositionsLensABI } from '../../abi';
 // utils
 import { getDerivativeHash } from '../../utils';
+import { SDKContext } from '../../common/sdkContext';
 
 export class SimulatorService {
-  private readonly provider$: providers.JsonRpcProvider;
+  private readonly sdkCtx$: SDKContext;
 
-  constructor(_provider: providers.JsonRpcProvider) {
-    this.provider$ = _provider;
+  constructor(_sdkCtx: SDKContext) {
+    this.sdkCtx$ = _sdkCtx;
   }
 
   public static computeDerivativeHash(_derivative: TDerivative): string {
@@ -25,9 +24,9 @@ export class SimulatorService {
   public async computePositionsAddressesByDerivative(_derivative: TDerivative): Promise<TPositionsAddressesOutput> {
     // TODO: remove hardcoded address
     const onChainPositionsLens = new ContractService<OnChainPositionsLens>(
-      '0x4b214b8aafbdeb170b550bb2dfed41aadd9acf74',
+      this.sdkCtx$,
+      this.sdkCtx$.getNetworkConfig().onChainPositionLensAddress,
       OnChainPositionsLensABI,
-      this.provider$,
     );
 
     const [longPositionAddress, shortPositionAddress] =
@@ -42,9 +41,9 @@ export class SimulatorService {
   public async computePositionsAddressesByDerivativeHash(_derivativeHash: string): Promise<TPositionsAddressesOutput> {
     // TODO: remove hardcoded address
     const onChainPositionsLens = new ContractService<OnChainPositionsLens>(
-      '0x4b214b8aafbdeb170b550bb2dfed41aadd9acf74',
+      this.sdkCtx$,
+      this.sdkCtx$.getNetworkConfig().onChainPositionLensAddress,
       OnChainPositionsLensABI,
-      this.provider$,
     );
 
     const [longPositionAddress, shortPositionAddress] =

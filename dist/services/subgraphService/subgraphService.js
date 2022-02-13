@@ -45,8 +45,8 @@ var axios_1 = __importDefault(require("axios"));
 // utils
 var queries_1 = require("./queries");
 var SubgraphService = /** @class */ (function () {
-    function SubgraphService(_subgraphEndpoint) {
-        this.subgraphEndpoint$ = _subgraphEndpoint;
+    function SubgraphService(_sdkCtx) {
+        this.sdkCtx$ = _sdkCtx;
     }
     SubgraphService.prototype.queryPositions = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -62,7 +62,7 @@ var SubgraphService = /** @class */ (function () {
                             variables: {},
                         };
                         return [4 /*yield*/, (0, axios_1.default)({
-                                url: this.subgraphEndpoint$,
+                                url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
                                 method: 'post',
                                 headers: headers,
                                 data: graphqlQuery,
@@ -88,7 +88,7 @@ var SubgraphService = /** @class */ (function () {
                             variables: {},
                         };
                         return [4 /*yield*/, (0, axios_1.default)({
-                                url: this.subgraphEndpoint$,
+                                url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
                                 method: 'post',
                                 headers: headers,
                                 data: graphqlQuery,
@@ -114,7 +114,7 @@ var SubgraphService = /** @class */ (function () {
                             variables: {},
                         };
                         return [4 /*yield*/, (0, axios_1.default)({
-                                url: this.subgraphEndpoint$,
+                                url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
                                 method: 'post',
                                 headers: headers,
                                 data: graphqlQuery,

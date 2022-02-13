@@ -1,13 +1,19 @@
-import { JsonRpcProvider } from '@ethersproject/providers';
-export declare const isProvider: (arg: JsonRpcProvider | undefined) => arg is JsonRpcProvider;
+import { providers } from 'ethers';
+export declare const isProvider: (arg: providers.JsonRpcProvider | undefined) => arg is providers.JsonRpcProvider;
 export declare enum ENetworks {
     GOERLI = "GOERLI",
     ARBITRUM_TESTNET = "ARBITRUM_TESTNET"
 }
+export interface IOpiumV2SDKConfig {
+    rpcUrl: string;
+    chainId: number;
+    override?: providers.ExternalProvider;
+}
 export declare type valueof<T> = T[keyof T];
 export declare type TAddress = string;
 export declare type TConfigByChain = {
-    registryAddress: TAddress;
+    registryProxyAddress: TAddress;
+    onChainPositionLensAddress: TAddress;
     subgraphEndpoint: string;
 };
 export declare type TConfigByChainOrUndefined = TConfigByChain | undefined;

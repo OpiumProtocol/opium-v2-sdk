@@ -54,7 +54,7 @@ var WrappedOracleAggregator = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.oracleAggregatorService$.getProvider()];
+                        return [4 /*yield*/, this.oracleAggregatorService$.sdkCtx.getProvider()];
                     case 1:
                         signer = (_a.sent()).getSigner();
                         // eslint-disable-next-line no-underscore-dangle

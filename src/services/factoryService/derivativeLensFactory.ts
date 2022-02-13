@@ -1,5 +1,5 @@
 // theirs
-import { BigNumberish, BigNumber, providers } from 'ethers';
+import { BigNumberish, BigNumber } from 'ethers';
 // services
 import { ContractService } from './contractService';
 import { TAddress, TDerivative } from '../../types';
@@ -8,19 +8,20 @@ import { IDerivativeLogic, ILiveFeedOracleId } from '../../types/typechain';
 import { isErrorReasonExplicit } from '../../types/misc';
 import { IDerivativeLogicAbi, ILiveFeedOracleIdABI } from '../../abi';
 // utils
+import { SDKContext } from '../../common/sdkContext';
 import { SDKError } from '../../common';
 import { pickError } from '../../utils';
 
 export class DerivativeLensFactory {
-  private readonly provider$: providers.JsonRpcProvider;
+  private readonly sdkCtx$: SDKContext;
 
-  constructor(_provider: providers.JsonRpcProvider) {
-    this.provider$ = _provider;
+  constructor(_sdkCtx: SDKContext) {
+    this.sdkCtx$ = _sdkCtx;
   }
 
   public async getOracleIdResult(_oracleIdAddress: TAddress): Promise<BigNumberish> {
     try {
-      const oracleId = new ContractService<ILiveFeedOracleId>(_oracleIdAddress, ILiveFeedOracleIdABI, this.provider$);
+      const oracleId = new ContractService<ILiveFeedOracleId>(this.sdkCtx$, _oracleIdAddress, ILiveFeedOracleIdABI);
       return oracleId.contract.getResult();
     } catch (error) {
       if (isErrorReasonExplicit(error)) {
@@ -41,9 +42,9 @@ export class DerivativeLensFactory {
   ): Promise<[BigNumber, BigNumber]> {
     try {
       const syntheticId = new ContractService<IDerivativeLogic>(
+        this.sdkCtx$,
         _derivative.syntheticId,
         IDerivativeLogicAbi,
-        this.provider$,
       );
       return syntheticId.contract.getExecutionPayout(_derivative, _strikeResult);
     } catch (error) {
