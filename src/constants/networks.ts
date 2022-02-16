@@ -19,7 +19,7 @@ export const networksConfig = {
   },
   [ENetworks.ARBITRUM_ONE]: {
     registryProxyAddress: '0x17b6ffe276e8A4a299a5a87a656aFc5b8FA3ee4a',
-    onChainPositionLensAddress: '',
+    onChainPositionLensAddress: '0xfa01Fd6118445F811753D96178F2ef8AE77caa53',
     subgraphEndpoint: '',
   },
 };
