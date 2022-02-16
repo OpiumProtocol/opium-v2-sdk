@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { isBigNumberish } from '@ethersproject/bignumber/lib/bignumber';
 import { findKey } from 'lodash';
 import { networksConfig } from '../constants';
@@ -37,7 +38,8 @@ export function struct(tuple: any): any {
   // check if tuple is actually an array
   // [1, 2, 3] => array vs [1, 2, 3, "a": 1, "b": 2, "c": 3] => object
   // NOTE: [] are not picked up as array (see *)
-  const properties = keys.filter(key => isNaN(Number(key)));
+  const properties = keys.filter(key => Number.isNaN(Number(key)));
+  // eslint-disable-next-line no-use-before-define
   if (properties.length === 0) return structArray(tuple);
 
   const copy: Record<string, unknown> = {};

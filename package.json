@@ -7,10 +7,6 @@
   "files": [
     "dist"
   ],
-  "include": [
-    "src",
-    "dist"
-  ],
   "keywords": [
     "blockchain",
     "ethereum",
@@ -33,7 +29,12 @@
       "email": "ali@opium.team"
     }
   ],
-  "license": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpiumProtocol/opium-v2-sdk.git"
+  },
+  "license": "ISC",
+  "author": "Opium Team <hi@opium.team>",
   "scripts": {
     "build": "tsc",
     "generate:types": "typechain --target=ethers-v5 'src/abi/**/*.json' --out-dir 'src/types/typechain'",
