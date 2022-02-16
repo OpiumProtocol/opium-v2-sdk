@@ -9,6 +9,8 @@ export enum ENetworks {
   GOERLI = 'GOERLI',
   // eslint-disable-next-line no-unused-vars
   ARBITRUM_TESTNET = 'ARBITRUM_TESTNET',
+  // eslint-disable-next-line no-unused-vars
+  ARBITRUM_ONE = 'ARBITRUM_ONE',
 }
 
 export interface IOpiumV2SDKConfig {
