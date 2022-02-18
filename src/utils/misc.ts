@@ -12,7 +12,7 @@ export const pickError = (
   if (protocolError) {
     return protocolError;
   }
-  throw new Error('Unrecognized protocol error');
+  throw new Error(`Unrecognized protocol error: ${semanticError}`);
 };
 
 export const configByChain = (chainIds: { [key: string]: number }, chainId: number): TConfigByChainOrUndefined => {
