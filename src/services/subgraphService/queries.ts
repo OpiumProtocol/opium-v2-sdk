@@ -1,38 +1,24 @@
-export const positionsQuery = `
-query Positions {
-  positions {
-    id
-    name
-    symbol
-    totalSupply
-  }
-}
-`;
-
-export const buyersQuery = `
-query Buyers {
-    buyers {
-        id
-        address
-        p2pVaultBalances {
-            id
-            derivativeHash
-            balance
+export const holderPositionsQuery = (holderAddress: string) => `
+    query HolderPositions {
+        holderPositions(where: {
+            holder: "${holderAddress.toLowerCase()}"
+        }) {
+            longBalance
+            shortBalance
+            ticker {
+                margin
+                endTime
+                params
+                oracleId
+                token
+                syntheticId
+                longPosition {
+                    id
+                }
+                shortPosition {
+                    id
+                }
+            }
         }
     }
-}
-`;
-
-export const sellersQuery = `
-query Sellers {
-    sellers {
-        id
-        address
-        p2pVaultBalances {
-            id
-            derivativeHash
-            balance
-        }
-    }
-}
 `;
