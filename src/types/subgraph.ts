@@ -20,3 +20,24 @@ export type THolderPositionsQueryResponse = {
     };
   }[];
 };
+
+export type TTickerQueryData = {
+  id: string
+  margin: string
+  endTime: string
+  params: string[]
+  oracleId: string
+  token: string
+  syntheticId: string
+  longPosition: {
+    id: string
+    totalSupply: string
+  }
+  shortPosition: {
+    id: string
+    totalSupply: string
+  }
+}
+export type TTickersQueryResponse = {
+  tickers: TTickerQueryData[]
+}
