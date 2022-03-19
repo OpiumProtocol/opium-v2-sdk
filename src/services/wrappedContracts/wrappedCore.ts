@@ -50,11 +50,23 @@ export class WrappedCore {
     _overrides: CallOverrides = {},
   ): Promise<ContractReceipt> {
     try {
+      // Get the provided signer and it's address
       const signer = (await this.coreService$.sdkCtx.getProvider()).getSigner();
-      const tokenSpenderAddress = await this.coreService$.contract.getProtocolAddresses();
+      const signerAddress = await signer.getAddress();
+      // Get the protocol addresses
+      const protocolAddresses = await this.coreService$.contract.getProtocolAddresses();
+      // Create instance of ERC20 collateral token
       const token = <IERC20>new Contract(_derivative.token, IERC20Abi, this.coreService$.sdkCtx.getProvider());
+      // Get the margin required for derivative minting
       const requiredMargin = await this.computeDerivativeMargin$(_derivative, _amount);
-      await token.connect(signer).approve(tokenSpenderAddress.tokenSpender, requiredMargin);
+      // Get user's current token allowance to token spender
+      const userAllowance = await token.connect(signer).allowance(signerAddress, protocolAddresses.tokenSpender);
+      // If user's current token allowance is less than required margin, then call the approve function
+      if (userAllowance.lt(requiredMargin)) {
+        // Approve tokens to the TokenSpender in order to mint derivatives by user
+        await token.connect(signer).approve(protocolAddresses.tokenSpender, requiredMargin);
+      }
+      // Create and mint the derivatives
       const tx = await this.coreService$.contract
         .connect(signer)
         .createAndMint(_derivative, _amount, _positionsOwners, _overrides);

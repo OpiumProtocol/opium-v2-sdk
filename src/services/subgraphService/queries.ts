@@ -47,7 +47,7 @@ export const tickersByDerivativeHashQuery = (derivativeHash: string) => `
             }
         }
     }
-`
+`;
 export const tickersByLongPositionAddressQuery = (longPositionAddress: string) => `
     query Tickers {
         tickers(where: {
@@ -70,7 +70,7 @@ export const tickersByLongPositionAddressQuery = (longPositionAddress: string) =
             }
         }
     }
-`
+`;
 export const tickersByShortPositionAddressQuery = (shortPositionAddress: string) => `
     query Tickers {
         tickers(where: {
@@ -93,4 +93,4 @@ export const tickersByShortPositionAddressQuery = (shortPositionAddress: string)
             }
         }
     }
-`
+`;

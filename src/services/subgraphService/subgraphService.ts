@@ -4,7 +4,12 @@ import { SDKContext } from '../../common/sdkContext';
 // types
 import { THolderPositionsQueryResponse, TTickersQueryResponse } from '../../types/subgraph';
 // utils
-import { holderPositionsQuery, tickersByDerivativeHashQuery, tickersByLongPositionAddressQuery, tickersByShortPositionAddressQuery } from './queries';
+import {
+  holderPositionsQuery,
+  tickersByDerivativeHashQuery,
+  tickersByLongPositionAddressQuery,
+  tickersByShortPositionAddressQuery,
+} from './queries';
 
 export class SubgraphService {
   private readonly sdkCtx$: SDKContext;
