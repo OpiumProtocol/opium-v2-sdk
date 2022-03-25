@@ -431,9 +431,31 @@ export class WrappedCore {
   }
 
   // helpers
-  public async computeDerivativeMargin(_derivative: TDerivative, _amount: BigNumberish) {
+  public async computeDerivativeMargin(_derivative: TDerivative, _amount: BigNumberish): Promise<BigNumber> {
     try {
       return this.computeDerivativeMargin$(_derivative, _amount);
+    } catch (error) {
+      if (isErrorReasonExplicit(error)) {
+        if (pickError(error.reason)) {
+          throw new SDKError(pickError(error.reason));
+        }
+      }
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
+      throw Error;
+    }
+  }
+
+  public async getBuyerAndSellerMargin(
+    _derivative: TDerivative,
+  ): Promise<{ buyerMargin: BigNumber; sellerMargin: BigNumber }> {
+    try {
+      const syntheticId = <IDerivativeLogic>(
+        new Contract(_derivative.syntheticId, IDerivativeLogicAbi, this.coreService$.sdkCtx.getProvider())
+      );
+      const { buyerMargin, sellerMargin } = await syntheticId.getMargin(_derivative);
+      return { buyerMargin, sellerMargin };
     } catch (error) {
       if (isErrorReasonExplicit(error)) {
         if (pickError(error.reason)) {
