@@ -7,6 +7,7 @@ export const holderPositionsQuery = (holderAddress: string) => `
             longBalance
             shortBalance
             ticker {
+                id
                 margin
                 endTime
                 params

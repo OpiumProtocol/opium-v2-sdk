@@ -5,6 +5,7 @@ export type THolderPositionsQueryResponse = {
     longBalance: string;
     shortBalance: string;
     ticker: {
+      id: string;
       margin: string;
       endTime: string;
       params: string[];
