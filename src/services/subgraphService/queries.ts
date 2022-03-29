@@ -95,3 +95,26 @@ export const tickersByShortPositionAddressQuery = (shortPositionAddress: string)
         }
     }
 `;
+export const allTickers = () => `
+    query Tickers {
+        tickers(orderBy: createdAt, orderDirection: desc) {
+            id
+            # derivative
+            margin
+            endTime
+            params
+            syntheticId
+            token
+            oracleId
+            # positions
+            longPosition {
+                id
+                totalSupply
+            }
+            shortPosition {
+                id
+                totalSupply
+            }
+        }
+    }
+`;

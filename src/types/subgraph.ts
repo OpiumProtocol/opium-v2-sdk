@@ -42,3 +42,24 @@ export type TTickerQueryData = {
 export type TTickersQueryResponse = {
   tickers: TTickerQueryData[];
 };
+
+export type TAllTickersTicker = {
+  id: string;
+  margin: string;
+  endTime: string;
+  params: string[];
+  syntheticId: string;
+  token: string;
+  oracleId: string;
+  longPosition: {
+    id: string;
+    totalSupply: string;
+  };
+  shortPosition: {
+    id: string;
+    totalSupply: string;
+  };
+};
+export type TAllTickersQueryResponse = {
+  tickers: TAllTickersTicker[];
+};

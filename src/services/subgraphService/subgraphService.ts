@@ -2,13 +2,14 @@
 import axios from 'axios';
 import { SDKContext } from '../../common/sdkContext';
 // types
-import { THolderPositionsQueryResponse, TTickersQueryResponse } from '../../types/subgraph';
+import { THolderPositionsQueryResponse, TTickersQueryResponse, TAllTickersQueryResponse } from '../../types/subgraph';
 // utils
 import {
   holderPositionsQuery,
   tickersByDerivativeHashQuery,
   tickersByLongPositionAddressQuery,
   tickersByShortPositionAddressQuery,
+  allTickers,
 } from './queries';
 
 export class SubgraphService {
@@ -81,6 +82,25 @@ export class SubgraphService {
     };
     const graphqlQuery = {
       query: tickersByShortPositionAddressQuery(shortPositionAddress),
+      variables: {},
+    };
+
+    const response = await axios({
+      url: this.sdkCtx$.getNetworkConfig().subgraphEndpoint,
+      method: 'post',
+      headers,
+      data: graphqlQuery,
+    });
+
+    return response.data.data;
+  }
+
+  public async queryAllTickers(): Promise<TAllTickersQueryResponse> {
+    const headers = {
+      'content-type': 'application/json',
+    };
+    const graphqlQuery = {
+      query: allTickers(),
       variables: {},
     };
 
