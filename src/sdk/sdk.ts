@@ -8,6 +8,7 @@ import { SimulatorService } from '../services/simulatorService/simulatorService'
 import { ContractService } from '../services/factoryService/contractService';
 import { DerivativeLensFactory } from '../services/factoryService';
 // types
+import { TProtocolAddresses } from '../types/contracts';
 import { IOpiumV2SDKConfig } from '../types/misc';
 import { RegistryABI, CoreABI, OracleAggregatorABI, SyntheticAggregatorABI } from '../abi';
 import { Core, OracleAggregator, Registry } from '../types/typechain';
@@ -70,6 +71,7 @@ export class OpiumV2SDK {
     coreInstance: WrappedCore;
     oracleAggregatorInstance: WrappedOracleAggregator;
     syntheticAggregatorInstance: WrappedSyntheticAggregator;
+    protocolAddresses: TProtocolAddresses;
   }> {
     const protocolAddresses = await this.registryInstance.getProtocolAddresses();
 
@@ -90,6 +92,7 @@ export class OpiumV2SDK {
       coreInstance: this.coreInstance,
       oracleAggregatorInstance: this.oracleAggregatorInstance,
       syntheticAggregatorInstance: this.syntheticAggregatorInstance,
+      protocolAddresses,
     };
   }
 }
