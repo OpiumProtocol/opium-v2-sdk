@@ -64,7 +64,8 @@ export class WrappedCore {
       // If user's current token allowance is less than required margin, then call the approve function
       if (userAllowance.lt(requiredMargin)) {
         // Approve tokens to the TokenSpender in order to mint derivatives by user
-        await token.connect(signer).approve(protocolAddresses.tokenSpender, requiredMargin);
+        const tx = await token.connect(signer).approve(protocolAddresses.tokenSpender, requiredMargin);
+        await tx.wait();
       }
       // Create and mint the derivatives
       const tx = await this.coreService$.contract
