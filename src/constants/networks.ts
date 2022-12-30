@@ -5,6 +5,7 @@ export const chainIds = {
   [ENetworks.ARBITRUM_TESTNET]: 421611,
   [ENetworks.ARBITRUM_ONE]: 42161,
   [ENetworks.ETHEREUM]: 1,
+  [ENetworks.MATIC]: 137,
 };
 
 export const networksConfig = {
@@ -27,5 +28,10 @@ export const networksConfig = {
     registryProxyAddress: '0xbd0e3097F47cEcA12407bAc42cDD574cf3072F23',
     onChainPositionLensAddress: '0xfa01Fd6118445F811753D96178F2ef8AE77caa53',
     subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/opiumprotocol/opium-v2-mainnet',
+  },
+  [ENetworks.MATIC]: {
+    registryProxyAddress: '0x17b6ffe276e8A4a299a5a87a656aFc5b8FA3ee4a',
+    onChainPositionLensAddress: '0x33afAaA35df82D56833B7EEacb2b65Eb805AC774',
+    subgraphEndpoint: 'https://api.thegraph.com/subgraphs/name/opiumprotocol/opium-v2-polygon',
   },
 };

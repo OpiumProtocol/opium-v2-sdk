@@ -13,6 +13,8 @@ export enum ENetworks {
   ARBITRUM_ONE = 'ARBITRUM_ONE',
   // eslint-disable-next-line no-unused-vars
   ETHEREUM = 'ETHEREUM',
+  // eslint-disable-next-line no-unused-vars
+  MATIC = 'MATIC',
 }
 
 export interface IOpiumV2SDKConfig {
